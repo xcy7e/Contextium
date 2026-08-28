@@ -1,0 +1,30 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Contextium" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:fontFamily">@font/montserrat_variable</item>
+
+        <!-- General Colors -->
+        <item name="colorPrimary">#7652C8</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSurface">#141217</item>
+        <item name="colorOnSurface">#E8E1EA</item>
+
+        <!-- Icon colors for system bars -->
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        <!-- Corrected System Bar Colors -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Splashscreen -->
+    <style name="Theme.Contextium.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#0F0D12</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>
+        <item name="postSplashScreenTheme">@style/Theme.Contextium</item>
+    </style>
+
+    <style name="Theme.Contextium" parent="Base.Theme.Contextium" />
+</resources>

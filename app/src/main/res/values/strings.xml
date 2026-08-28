@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Contextium</string>
+    <string name="contextium_action_label">Contextium</string>
+
+    <string name="manager_title">ContextMenuItemManager</string>
+    <string name="settings_new_title">Add Entry</string>
+    <string name="settings_edit_title">Edit Entry</string>
+
+    <string name="field_title">Name</string>
+    <string name="field_label">Label</string>
+    <string name="field_url">URL</string>
+    <string name="field_url_param">Parameter</string>
+    <string name="field_enabled">Enabled</string>
+
+    <string name="action_add">Add</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_undo">Undo delete</string>
+
+    <string name="empty_item_list">No menu entries.</string>
+    <string name="empty_active_item_list">No active menu entries.</string>
+    <string name="item_deleted">Entry deleted</string>
+    <string name="item_saved">Entry saved</string>
+    <string name="validation_error">Please fill in all required fields.</string>
+    <string name="duplicate_error">Name and label must be unique.</string>
+
+    <string name="about_title">About Contextium</string>
+    <string name="about_author">Developed with ♥️ by xcy7e</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_github">GitHub-Repository</string>
+    <string name="about_description">Contextium extends the Android-Contextmenu with individual configurable menu items to run web searches. Select text in an App, choose \'Contextium\' and open the selection in your configured URL.</string>
+
+    <string name="item_label">%1$s</string>
+    <string name="field_title_helper">Unique internal item title</string>
+    <string name="field_label_helper">Display name in the context menu selection</string>
+    <string name="field_url_helper">Target URL without the search parameter\n(e.g. \'https://www.google.com/search\')</string>
+    <string name="field_url_param_helper">Name of the URL-Parameter (e.g. \'q\')</string>
+</resources>

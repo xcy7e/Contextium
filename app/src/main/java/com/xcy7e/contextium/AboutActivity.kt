@@ -1,0 +1,163 @@
+package com.xcy7e.contextium
+
+import android.content.Intent
+import android.graphics.Typeface
+import android.net.Uri
+import android.os.Bundle
+import android.view.Gravity
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.TextView
+import androidx.activity.ComponentActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.button.MaterialButton
+
+class AboutActivity : ComponentActivity() {
+
+    companion object {
+        private const val GITHUB_REPO_URL = "https://github.com/xcy7e/Contextium"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val poiretOneBold = Typeface.create(
+            resources.getFont(R.font.poiret_one_regular),
+            Typeface.BOLD
+        )
+
+        val content = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER_HORIZONTAL
+        }
+
+        val logo = ImageView(this).apply {
+            setImageResource(R.mipmap.ic_launcher_foreground)
+            contentDescription = getString(R.string.app_name)
+            scaleType = ImageView.ScaleType.CENTER_INSIDE
+        }
+
+        val heading = TextView(this).apply {
+            text = getString(R.string.app_name)
+            textSize = 40f
+            gravity = Gravity.CENTER
+        }
+        heading.setTypeface(poiretOneBold)
+
+        val description = TextView(this).apply {
+            text = getString(R.string.about_description)
+            textSize = 14f
+            gravity = Gravity.FILL_HORIZONTAL
+            setLineSpacing(dp(5).toFloat(), 1f)
+        }
+
+        val author = TextView(this).apply {
+            text = getString(R.string.about_author)
+            textSize = 14f
+            gravity = Gravity.CENTER
+        }
+
+        val version = TextView(this).apply {
+            text = getString(R.string.about_version, BuildConfig.VERSION_NAME)
+            textSize = 14f
+            gravity = Gravity.CENTER
+        }
+
+        val githubButton = MaterialButton(this).apply {
+            text = getString(R.string.about_github)
+            textSize = 18f
+            cornerRadius = dp(28)
+
+            setOnClickListener {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse(GITHUB_REPO_URL)
+                    )
+                )
+            }
+        }
+
+        content.addView(
+            logo,
+            LinearLayout.LayoutParams(dp(160), dp(160)).apply {
+                bottomMargin = dp(12)
+            }
+        )
+
+        content.addView(
+            heading,
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                bottomMargin = dp(0)
+            }
+        )
+
+        content.addView(
+            version,
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                bottomMargin = dp(32)
+                topMargin = dp(0)
+            }
+        )
+
+        content.addView(
+            description,
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                bottomMargin = dp(28)
+            }
+        )
+
+        content.addView(
+            author,
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                topMargin = dp(64)
+                bottomMargin = dp(24)
+            }
+        )
+
+        content.addView(
+            githubButton,
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                dp(56)
+            )
+        )
+
+        val scrollView = ScrollView(this).apply {
+            addView(content)
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(scrollView) { _, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            scrollView.setPadding(
+                dp(28),
+                bars.top + dp(48),
+                dp(28),
+                bars.bottom + dp(32)
+            )
+
+            insets
+        }
+
+        setContentView(scrollView)
+    }
+
+    private fun dp(value: Int): Int {
+        return (value * resources.displayMetrics.density).toInt()
+    }
+}
