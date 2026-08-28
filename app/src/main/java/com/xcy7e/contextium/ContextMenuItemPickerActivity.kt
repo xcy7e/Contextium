@@ -18,6 +18,7 @@ import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import java.util.concurrent.Executors
+import androidx.core.net.toUri
 
 class ContextMenuItemPickerActivity : Activity() {
 
@@ -147,7 +148,11 @@ class ContextMenuItemPickerActivity : Activity() {
             }
 
             listView.setOnItemClickListener { _, _, position, _ ->
-                openItem(items[position], selectedText)
+                val itemPosition = position - listView.headerViewsCount
+
+                if (itemPosition in items.indices) {
+                    openItem(items[itemPosition], selectedText)
+                }
             }
 
             content.addView(
@@ -185,7 +190,7 @@ class ContextMenuItemPickerActivity : Activity() {
     }
 
     private fun openItem(item: ContextMenuItem, selectedText: String) {
-        val targetUrl = Uri.parse(item.url)
+        val targetUrl = item.url.toUri()
             .buildUpon()
             .appendQueryParameter(item.urlParam, selectedText)
             .build()

@@ -2,6 +2,7 @@ package com.xcy7e.contextium
 
 import android.content.res.ColorStateList
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
@@ -252,6 +253,19 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
 
         if (itemTitle.isEmpty() || label.isEmpty() || url.isEmpty() || urlParam.isEmpty()) {
             Toast.makeText(this, R.string.validation_error, Toast.LENGTH_LONG).show()
+            return
+        }
+        val parsedUrl = Uri.parse(url)
+
+        if (
+            parsedUrl.scheme !in listOf("http", "https") ||
+            parsedUrl.host.isNullOrBlank()
+        ) {
+            Toast.makeText(
+                this,
+                R.string.validation_url_error,
+                Toast.LENGTH_LONG
+            ).show()
             return
         }
 
