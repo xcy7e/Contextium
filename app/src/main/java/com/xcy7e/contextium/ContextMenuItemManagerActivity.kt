@@ -1,8 +1,10 @@
 package com.xcy7e.contextium
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -44,6 +46,10 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         rootView = FrameLayout(this)
+
+        val content = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+        }
 
         val poiretOneBold = Typeface.create(
             resources.getFont(R.font.poiret_one_regular),
@@ -95,7 +101,8 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
 
         recyclerView = RecyclerView(this).apply {
             layoutManager = LinearLayoutManager(this@ContextMenuItemManagerActivity)
-            clipToPadding = false
+            clipToPadding = true
+            clipChildren = true
             setBackgroundColor(Color.TRANSPARENT)
         }
 
@@ -110,6 +117,13 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
             contentDescription = getString(R.string.action_add)
             setImageResource(android.R.drawable.ic_input_add)
 
+            backgroundTintMode = PorterDuff.Mode.SRC_IN
+            backgroundTintList = ColorStateList.valueOf(0xFF7652C8.toInt())
+            imageTintList = ColorStateList.valueOf(0xFFFFFFFF.toInt())
+
+            compatElevation = 0f
+            compatPressedTranslationZ = 0f
+
             setOnClickListener {
                 startActivity(
                     Intent(
@@ -120,8 +134,25 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
             }
         }
 
-        rootView.addView(
+        content.addView(
+            header,
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                dp(152)
+            )
+        )
+
+        content.addView(
             recyclerView,
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                0,
+                1f
+            )
+        )
+
+        rootView.addView(
+            content,
             FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT
@@ -136,14 +167,6 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
             )
         )
 
-        rootView.addView(
-            header,
-            FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                dp(256)
-            )
-        )
-
         val fabParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT,
@@ -155,20 +178,31 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(rootView) { _, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             val sideMargin = dp(20)
-            val headerHeight = dp(160)
 
-            header.setPadding(sideMargin, bars.top + dp(24), sideMargin, 0)
+            content.setPadding(
+                sideMargin,
+                bars.top,
+                sideMargin,
+                bars.bottom
+            )
+
+            header.setPadding(
+                0,
+                dp(24),
+                0,
+                0
+            )
 
             recyclerView.setPadding(
-                sideMargin,
-                bars.top + headerHeight + dp(12),
-                sideMargin,
-                bars.bottom + dp(112)
+                0,
+                dp(12),
+                0,
+                dp(112)
             )
 
             emptyText.setPadding(
                 sideMargin,
-                bars.top + headerHeight,
+                bars.top + dp(152),
                 sideMargin,
                 bars.bottom
             )
@@ -436,10 +470,45 @@ private class ContextMenuItemAdapter(
             R.string.item_label,
             item.label
         )
-        holder.url.text = item.url
+        holder.url.text = shortenUrl(item.url)
 
         holder.itemView.alpha = if (item.enabled) 1.0f else 0.40f
         holder.itemView.setOnClickListener { onClick(item) }
+    }
+
+    private fun shortenUrl(url: String): String {
+        val trimmedUrl = url.trim()
+        val schemeEnd = trimmedUrl.indexOf("://")
+
+        if (schemeEnd == -1) {
+            return trimmedUrl
+        }
+
+        val authorityStart = schemeEnd + 3
+        val pathStart = trimmedUrl.indexOf('/', authorityStart)
+        val queryStart = trimmedUrl.indexOf('?', authorityStart)
+        val fragmentStart = trimmedUrl.indexOf('#', authorityStart)
+
+        val firstSuffixStart = listOf(pathStart, queryStart, fragmentStart)
+            .filter { it >= 0 }
+            .minOrNull()
+
+        return when {
+            // Nur Schema + Domain/TLD.
+            firstSuffixStart == null -> trimmedUrl
+
+            // URL endet direkt nach dem Slash, beispielsweise https://example.org/
+            firstSuffixStart == trimmedUrl.lastIndex &&
+                    trimmedUrl[firstSuffixStart] == '/' -> trimmedUrl
+
+            // Alles nach Domain/TLD abschneiden.
+            trimmedUrl[firstSuffixStart] == '/' ->
+                trimmedUrl.substring(0, firstSuffixStart + 1) + "..."
+
+            // Query oder Fragment direkt nach der TLD.
+            else ->
+                trimmedUrl.substring(0, firstSuffixStart) + "..."
+        }
     }
 
     override fun getItemCount(): Int = items.size
