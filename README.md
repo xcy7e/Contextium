@@ -8,3 +8,16 @@ You can find the newest version [here](https://github.com/xcy7e/Contextium/relea
 
 1. Download the APK
 2. Install the APK (you might need to allow installation of foreign apps in your phone's settings)
+
+## How it works
+Add as many context menu entries as you want..
+![Main App Screen - List of context menu entries](assets/img/MainActivity.jpg)
+
+Define name, label and the URL + parameter..
+![Context menu entry settings](ContextMenuItem.jpg)
+
+Open the context menu > tap `Contextium`..
+![Native android context menu](AndroidContextMenu.jpg)
+
+Select one of your items to start the webrequest/search..
+![Contextmenu items](ContextMenu.jpg)
