@@ -1,5 +1,6 @@
 package com.xcy7e.contextium
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Canvas
@@ -29,7 +30,6 @@ import java.util.concurrent.Executors
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import android.app.AlertDialog
 import android.net.Uri
-import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.drawerlayout.widget.DrawerLayout
@@ -39,6 +39,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.OutputStreamWriter
+import androidx.core.graphics.drawable.toDrawable
 
 class ContextMenuItemManagerActivity : ComponentActivity() {
 
@@ -384,7 +385,7 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
     }
 
     private fun attachItemTouchHelper() {
-        val deleteBackground = ColorDrawable(Color.rgb(183, 28, 28))
+        val deleteBackground = Color.rgb(183, 28, 28).toDrawable()
         val deleteIcon = ContextCompat.getDrawable(this, R.drawable.ic_delete)!!
 
         ItemTouchHelper(
@@ -690,6 +691,7 @@ private class ContextMenuItemAdapter(
 
     private val items = mutableListOf<ContextMenuItem>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submitItems(newItems: List<ContextMenuItem>) {
         items.clear()
         items.addAll(newItems)

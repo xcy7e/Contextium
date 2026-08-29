@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
+import androidx.core.net.toUri
 
 class AboutActivity : ComponentActivity() {
 
@@ -76,7 +77,7 @@ class AboutActivity : ComponentActivity() {
                 startActivity(
                     Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse(GITHUB_REPO_URL)
+                        GITHUB_REPO_URL.toUri()
                     )
                 )
             }

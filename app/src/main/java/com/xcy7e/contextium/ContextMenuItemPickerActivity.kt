@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -19,7 +18,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import java.util.concurrent.Executors
 import androidx.core.net.toUri
-import androidx.core.view.WindowCompat
+import androidx.core.graphics.drawable.toDrawable
 
 class ContextMenuItemPickerActivity : Activity() {
 
@@ -101,7 +100,7 @@ class ContextMenuItemPickerActivity : Activity() {
             )
         } else {
             val listView = ListView(this).apply {
-                divider = ColorDrawable(0xAA333333.toInt())
+                divider = 0xAA333333.toInt().toDrawable()
                 dividerHeight = dp(1)
             }
             val topBorder = View(this).apply {

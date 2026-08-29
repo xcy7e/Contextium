@@ -51,7 +51,7 @@ dependencies {
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation("androidx.drawerlayout:drawerlayout:1.2.0")
+    implementation(libs.androidx.drawerlayout)
 
     testImplementation(libs.junit)
 

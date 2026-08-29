@@ -19,6 +19,7 @@ import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.util.concurrent.Executors
+import androidx.core.net.toUri
 
 class ContextMenuItemSettingsActivity : ComponentActivity() {
 
@@ -65,10 +66,6 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
         val montserratBold = Typeface.create(
             resources.getFont(R.font.montserrat_variable),
             Typeface.BOLD
-        )
-        val montserratNormal = Typeface.create(
-            resources.getFont(R.font.montserrat_variable),
-            Typeface.NORMAL
         )
 
         titleInput = addInput(
@@ -262,7 +259,7 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
             Toast.makeText(this, R.string.validation_error, Toast.LENGTH_LONG).show()
             return
         }
-        val parsedUrl = Uri.parse(url)
+        val parsedUrl = url.toUri()
 
         if (
             parsedUrl.scheme !in listOf("http", "https") ||
