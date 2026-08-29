@@ -59,3 +59,8 @@ PARAM: symbol
 # Selected text: "FOO BAR"
 # Request URL: https://www.tradingview.com/chart/?x=y&symbol=FOO%20BAR
 ```
+
+---
+
+## Weblinks
+- [Privacy notes](https://contextium.xcy7e.app/privacy) or `PRIVACY.md`
