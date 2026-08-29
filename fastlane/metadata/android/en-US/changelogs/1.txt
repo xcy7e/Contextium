@@ -1,6 +1,8 @@
-- Add feature: Import/Export of entry list
-- Add sidebar menu with links: Export, Import, About
-- UI: Overall improvements
-- UI bugfix: Activity views missing padding on older devices and devices with punch-hole/notch
-- About: Add link to my website
-- README: Add detailed information
+<ul>
+<li>Add feature: Import/Export of entry list</li>
+<li>Add sidebar menu with links: Export, Import, About</li>
+<li>UI: Overall improvements</li>
+<li>UI bugfix: Activity views missing padding on older devices and devices with punch-hole/notch</li>
+<li>About: Add link to my website</li>
+<li>README: Add detailed information</li>
+</ul>
