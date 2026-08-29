@@ -63,4 +63,4 @@ PARAM: symbol
 ---
 
 ## Weblinks
-- [Privacy notes](https://contextium.xcy7e.app/privacy) or `PRIVACY.md`
+- Privacy Policy can be found [here](https://contextium.xcy7e.app/privacy) or in `PRIVACY.md` in this repository
