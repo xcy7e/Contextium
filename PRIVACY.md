@@ -32,3 +32,6 @@ For privacy-related questions, contact:
 
 Jonathan / xcy7e  
 <jonathan@xcy7e.de>
+
+## Weblinks
+- You can find this Privacy Policy [here](https://contextium.xcy7e.app/privacy) or in `PRIVACY.md` in this repository.
