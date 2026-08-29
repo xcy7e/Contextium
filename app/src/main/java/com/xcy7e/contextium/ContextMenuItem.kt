@@ -1,4 +1,4 @@
-package com.xcy7e.contextium
+package app.xcy7e.contextium
 
 import androidx.room.Entity
 import androidx.room.Index

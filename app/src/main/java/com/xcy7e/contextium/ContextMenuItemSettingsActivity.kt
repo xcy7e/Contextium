@@ -1,8 +1,7 @@
-package com.xcy7e.contextium
+package app.xcy7e.contextium
 
 import android.content.res.ColorStateList
 import android.graphics.Typeface
-import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.view.View

@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.xcy7e.contextium"
+    namespace = "app.xcy7e.contextium"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.xcy7e.contextium"
+        applicationId = "app.xcy7e.contextium"
         minSdk = 31
         targetSdk = 36
         versionCode = 1

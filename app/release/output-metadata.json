@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.xcy7e.contextium",
+  "applicationId": "app.xcy7e.contextium",
   "variantName": "release",
   "elements": [
     {

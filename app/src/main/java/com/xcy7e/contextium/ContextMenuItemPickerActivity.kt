@@ -1,9 +1,8 @@
-package com.xcy7e.contextium
+package app.xcy7e.contextium
 
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View

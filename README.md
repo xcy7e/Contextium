@@ -1,6 +1,9 @@
 ![App Icon](icon.png)
 
 # Contextium
+> **v1.3.0**
+> 
+> `app.xcy7e.contextium`
 
 Contextium extends the Android-Contextmenu with individual configurable menu items to run web
 searches. Select text in an App, choose \'Contextium\' and open the selection in your configured
