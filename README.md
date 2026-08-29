@@ -1,7 +1,5 @@
-<center>
-  <img src="icon.png" alt="Contextium app icon" style="max-width: 100%;">
-  <h1>Contextium</h1>
-</center>
+![Contextium app icon](icon.png)
+# Contextium
 
 Contextium extends Android's native text-selection context menu with configurable actions for web searches. Select text in apps (e.g. Browser), choose `Contextium`, and open the selected text with one of your configured search URLs.
 
