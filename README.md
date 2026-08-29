@@ -23,9 +23,8 @@ Download the latest APK from the [Releases page](https://github.com/xcy7e/Contex
 
 ## How It Works
 
-| | |
-|:---:|:---:|
 | **Add menu entries** | **Configure each entry** |
+|:---:|:---:|
 | ![Main app screen](assets/img/MainActivity.jpg) | ![Context menu entry settings](assets/img/ContextMenuItem.jpg) |
 | **Select text, then choose `Contextium`** | **Choose an action to start the web search** |
 | ![Native Android context menu](assets/img/AndroidContextMenu.jpg) | ![Contextium item picker](assets/img/ContextMenu.jpg) |
