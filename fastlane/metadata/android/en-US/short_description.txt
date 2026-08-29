@@ -1,1 +1,1 @@
-Add custom Context-Menu entries
+Configurable Android context menu helper
