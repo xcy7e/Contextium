@@ -19,6 +19,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import java.util.concurrent.Executors
 import androidx.core.net.toUri
+import androidx.core.view.WindowCompat
 
 class ContextMenuItemPickerActivity : Activity() {
 
@@ -78,7 +79,7 @@ class ContextMenuItemPickerActivity : Activity() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 dp(64)
             ).apply {
-                topMargin = dp(12)
+                topMargin = dp(32)
                 bottomMargin = dp(32)
             }
         )
@@ -187,6 +188,7 @@ class ContextMenuItemPickerActivity : Activity() {
         }
 
         setContentView(root)
+        ViewCompat.requestApplyInsets(root)
     }
 
     private fun openItem(item: ContextMenuItem, selectedText: String) {

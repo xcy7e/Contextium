@@ -43,4 +43,7 @@ interface ContextMenuItemDao {
 
     @Query("UPDATE context_menu_items SET sortOrder = :sortOrder, updatedAt = :updatedAt WHERE id = :id")
     fun updateSortOrder(id: Long, sortOrder: Int, updatedAt: Long)
+
+    @Query("DELETE FROM context_menu_items")
+    fun deleteAll()
 }

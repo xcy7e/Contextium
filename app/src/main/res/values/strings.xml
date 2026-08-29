@@ -16,6 +16,20 @@
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
     <string name="action_undo">Undo delete</string>
+    <string name="action_menu">Open menu</string>
+    <string name="action_export">Export</string>
+    <string name="action_import">Import</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_replace">Replace</string>
+
+    <string name="export_file_name">contextium-backup.json</string>
+    <string name="export_success">Export successful.</string>
+    <string name="export_error">Error exporting backup.</string>
+
+    <string name="import_success">%1$d entries has been imported.</string>
+    <string name="import_error">Invalid or broken backup file.</string>
+    <string name="import_confirm_title">Import now?</string>
+    <string name="import_confirm_message">The backup will wipe all existing entries and import the entries from the backup file.</string>
 
     <string name="empty_item_list">No menu entries!\nAdd one.</string>
     <string name="empty_active_item_list">No active menu entries.</string>

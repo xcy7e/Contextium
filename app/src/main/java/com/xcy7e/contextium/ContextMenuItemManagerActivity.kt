@@ -27,6 +27,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import java.util.concurrent.Executors
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import android.app.AlertDialog
+import android.net.Uri
+import android.provider.Settings
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.core.view.GravityCompat
+import androidx.core.view.WindowCompat
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.OutputStreamWriter
 
 class ContextMenuItemManagerActivity : ComponentActivity() {
 
@@ -40,12 +52,25 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var emptyText: TextView
     private lateinit var adapter: ContextMenuItemAdapter
+    private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        drawerLayout = DrawerLayout(this)
+
         rootView = FrameLayout(this)
+
+        drawerLayout.addView(
+            rootView,
+            DrawerLayout.LayoutParams(
+                DrawerLayout.LayoutParams.MATCH_PARENT,
+                DrawerLayout.LayoutParams.MATCH_PARENT
+            )
+        )
 
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -56,9 +81,23 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
             Typeface.BOLD
         )
 
-        val header = LinearLayout(this).apply {
+        val header = FrameLayout(this)
+        val headerContent = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER_HORIZONTAL
+        }
+
+        val menuButton = TextView(this).apply {
+            text = "☰"
+            textSize = 30f
+            gravity = Gravity.CENTER
+            contentDescription = getString(R.string.action_menu)
+            isClickable = true
+            isFocusable = true
+
+            setOnClickListener {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
         }
 
         val logo = ImageView(this).apply {
@@ -86,17 +125,30 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
         }
         heading.setTypeface(poiretOneBold)
 
-        header.addView(
+        headerContent.addView(
             logo,
             LinearLayout.LayoutParams(dp(72), dp(72))
         )
 
-        header.addView(
+        headerContent.addView(
             heading,
             LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 dp(64)
             )
+        )
+
+        header.addView(
+            headerContent,
+            FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+            )
+        )
+
+        header.addView(
+            menuButton,
+            FrameLayout.LayoutParams(dp(56), dp(56), Gravity.START or Gravity.TOP)
         )
 
         recyclerView = RecyclerView(this).apply {
@@ -176,19 +228,29 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
         rootView.addView(addButton, fabParams)
 
         ViewCompat.setOnApplyWindowInsetsListener(rootView) { _, insets ->
-            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or
+                        WindowInsetsCompat.Type.displayCutout()
+            )
             val sideMargin = dp(20)
 
             content.setPadding(
-                sideMargin,
+                sideMargin + bars.left,
                 bars.top,
-                sideMargin,
+                sideMargin + bars.right,
                 bars.bottom
             )
 
-            header.setPadding(
+            headerContent.setPadding(
                 0,
                 dp(24),
+                0,
+                0
+            )
+
+            menuButton.setPadding(
+                0,
+                dp(16),
                 0,
                 0
             )
@@ -201,9 +263,9 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
             )
 
             emptyText.setPadding(
-                sideMargin,
+                sideMargin + bars.left,
                 bars.top + dp(152),
-                sideMargin,
+                sideMargin + bars.right,
                 bars.bottom
             )
 
@@ -218,8 +280,6 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
             insets
         }
 
-        setContentView(rootView)
-
         adapter = ContextMenuItemAdapter { item ->
             startActivity(
                 Intent(
@@ -231,11 +291,96 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
 
         recyclerView.adapter = adapter
         attachItemTouchHelper()
+
+        addNavigationDrawer()
+        setContentView(drawerLayout)
+        ViewCompat.requestApplyInsets(rootView)
     }
 
     override fun onResume() {
         super.onResume()
         loadItems()
+    }
+
+    private val exportLauncher = registerForActivityResult(
+        ActivityResultContracts.CreateDocument("application/json")
+    ) { uri ->
+        if (uri != null) {
+            exportItems(uri)
+        }
+    }
+
+    private val importLauncher = registerForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        if (uri != null) {
+            confirmImport(uri)
+        }
+    }
+
+    private fun addNavigationDrawer() {
+        val poiretOneBold = Typeface.create(
+            resources.getFont(R.font.poiret_one_regular),
+            Typeface.BOLD
+        )
+
+        val drawerContent = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setBackgroundColor(Color.rgb(30, 28, 33))
+            setPadding(dp(24), dp(48), dp(24), dp(24))
+        }
+
+        val drawerTitle = TextView(this).apply {
+            text = getString(R.string.app_name)
+            textSize = 26f
+            setTypeface(poiretOneBold, Typeface.BOLD)
+            setPadding(0, 0, 0, dp(24))
+        }
+
+        val exportButton = drawerButton(getString(R.string.action_export)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+            exportLauncher.launch(getString(R.string.export_file_name))
+        }
+
+        val importButton = drawerButton(getString(R.string.action_import)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+            importLauncher.launch(
+                arrayOf("application/json", "text/*")
+            )
+        }
+
+        drawerContent.addView(drawerTitle)
+        drawerContent.addView(exportButton)
+        drawerContent.addView(importButton)
+
+        drawerLayout.addView(
+            drawerContent,
+            DrawerLayout.LayoutParams(
+                dp(260),
+                DrawerLayout.LayoutParams.MATCH_PARENT,
+                GravityCompat.START
+            )
+        )
+    }
+
+    private fun drawerButton(
+        text: String,
+        action: () -> Unit
+    ): TextView {
+        return TextView(this).apply {
+            this.text = text
+            textSize = 18f
+            gravity = Gravity.CENTER_VERTICAL
+            isClickable = true
+            isFocusable = true
+            setPadding(dp(16), 0, dp(16), 0)
+            setOnClickListener { action() }
+
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                dp(56)
+            )
+        }
     }
 
     private fun attachItemTouchHelper() {
@@ -307,14 +452,24 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
                         dao.delete(deletedItem)
                     }
 
-                    Snackbar.make(rootView, R.string.item_deleted, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.action_undo) {
-                            databaseExecutor.execute {
-                                dao.insert(deletedItem)
-                                loadItems()
-                            }
+                    val snackbar = Snackbar.make(
+                        rootView,
+                        R.string.item_deleted,
+                        Snackbar.LENGTH_LONG
+                    )
+
+                    snackbar.setBackgroundTint(Color.WHITE)
+                    snackbar.setTextColor(Color.BLACK)
+                    snackbar.setActionTextColor(0xFF190940.toInt())
+
+                    snackbar.setAction(R.string.action_undo) {
+                        databaseExecutor.execute {
+                            dao.insert(deletedItem)
+                            loadItems()
                         }
-                        .show()
+                    }
+
+                    snackbar.show()
                 }
             }
         ).attachToRecyclerView(recyclerView)
@@ -393,6 +548,140 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
     private fun dp(value: Int): Int {
         return (value * resources.displayMetrics.density).toInt()
     }
+
+    private fun exportItems(uri: Uri) {
+        databaseExecutor.execute {
+            try {
+                val jsonItems = JSONArray()
+
+                dao.getAll().forEach { item ->
+                    jsonItems.put(
+                        JSONObject().apply {
+                            put("title", item.title)
+                            put("label", item.label)
+                            put("url", item.url)
+                            put("urlParam", item.urlParam)
+                            put("enabled", item.enabled)
+                            put("sortOrder", item.sortOrder)
+                        }
+                    )
+                }
+
+                val root = JSONObject().apply {
+                    put("format", "contextium-backup")
+                    put("version", 1)
+                    put("items", jsonItems)
+                }
+
+                contentResolver.openOutputStream(uri)?.use { output ->
+                    OutputStreamWriter(output, Charsets.UTF_8).use { writer ->
+                        writer.write(root.toString(2))
+                    }
+                } ?: error("Ausgabedatei kann nicht geöffnet werden.")
+
+                runOnUiThread {
+                    Toast.makeText(this, R.string.export_success, Toast.LENGTH_SHORT).show()
+                }
+            } catch (_: Exception) {
+                runOnUiThread {
+                    Toast.makeText(this, R.string.export_error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun confirmImport(uri: Uri) {
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(R.string.import_confirm_title)
+            .setMessage(R.string.import_confirm_message)
+            .setNegativeButton(R.string.action_cancel, null)
+            .setPositiveButton(R.string.action_replace) { _, _ ->
+                importItems(uri)
+            }
+            .create()
+
+        dialog.setOnShowListener {
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                .setTextColor(Color.WHITE)
+
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setTextColor(0xFFB598FA.toInt())
+        }
+
+        dialog.show()
+    }
+
+    private fun importItems(uri: Uri) {
+        databaseExecutor.execute {
+            try {
+                val jsonText = contentResolver.openInputStream(uri)?.use { input ->
+                    BufferedReader(input.reader()).use { reader ->
+                        reader.readText()
+                    }
+                } ?: error("Eingabedatei kann nicht geöffnet werden.")
+
+                val backup = JSONObject(jsonText)
+
+                if (
+                    backup.optString("format") != "contextium-backup" ||
+                    backup.optInt("version") != 1
+                ) {
+                    error("Unbekanntes Backup-Format.")
+                }
+
+                val jsonItems = backup.getJSONArray("items")
+                val importedItems = mutableListOf<ContextMenuItem>()
+                val now = System.currentTimeMillis()
+
+                for (index in 0 until jsonItems.length()) {
+                    val jsonItem = jsonItems.getJSONObject(index)
+
+                    val title = jsonItem.getString("title").trim()
+                    val label = jsonItem.getString("label").trim()
+                    val url = jsonItem.getString("url").trim()
+                    val urlParam = jsonItem.getString("urlParam").trim()
+
+                    if (
+                        title.isEmpty() ||
+                        label.isEmpty() ||
+                        url.isEmpty() ||
+                        urlParam.isEmpty()
+                    ) {
+                        error("Ungültiger Eintrag.")
+                    }
+
+                    importedItems += ContextMenuItem(
+                        title = title,
+                        label = label,
+                        url = url,
+                        urlParam = urlParam,
+                        enabled = jsonItem.optBoolean("enabled", true),
+                        sortOrder = index,
+                        createdAt = now,
+                        updatedAt = now
+                    )
+                }
+
+                dao.deleteAll()
+                importedItems.forEach { dao.insert(it) }
+
+                runOnUiThread {
+                    loadItems()
+
+                    Toast.makeText(
+                        this,
+                        getString(R.string.import_success, importedItems.size),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (_: Exception) {
+                runOnUiThread {
+                    Toast.makeText(this, R.string.import_error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
 }
 
 private class ContextMenuItemAdapter(

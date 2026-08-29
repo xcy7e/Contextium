@@ -13,6 +13,7 @@ import androidx.activity.ComponentActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.textfield.TextInputEditText
@@ -43,6 +44,7 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         itemId = intent.getLongExtra(EXTRA_ITEM_ID, 0)
 
@@ -142,7 +144,7 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 dp(56)
             ).apply {
-                topMargin = dp(32)
+                topMargin = dp(16)
                 bottomMargin = dp(12)
             }
         )
@@ -165,20 +167,25 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
             )
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(scrollView) { _, insets ->
-            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+        setContentView(scrollView)
 
-            scrollView.setPadding(
-                dp(24),
-                bars.top + dp(32),
-                dp(24),
-                bars.bottom + dp(32)
+        ViewCompat.setOnApplyWindowInsetsListener(scrollView) { view, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or
+                        WindowInsetsCompat.Type.displayCutout()
+            )
+
+            view.setPadding(
+                dp(24) + bars.left,
+                dp(32) + bars.top,
+                dp(24) + bars.right,
+                dp(32) + bars.bottom
             )
 
             insets
         }
 
-        setContentView(scrollView)
+        ViewCompat.requestApplyInsets(scrollView)
     }
 
     private fun addInput(

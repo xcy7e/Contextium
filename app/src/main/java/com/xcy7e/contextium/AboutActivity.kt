@@ -11,6 +11,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
 
@@ -22,6 +23,7 @@ class AboutActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         val poiretOneBold = Typeface.create(
             resources.getFont(R.font.poiret_one_regular),
@@ -82,7 +84,7 @@ class AboutActivity : ComponentActivity() {
 
         content.addView(
             logo,
-            LinearLayout.LayoutParams(dp(160), dp(160)).apply {
+            LinearLayout.LayoutParams(dp(120), dp(120)).apply {
                 bottomMargin = dp(12)
             }
         )
@@ -141,20 +143,25 @@ class AboutActivity : ComponentActivity() {
             addView(content)
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(scrollView) { _, insets ->
-            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+        setContentView(scrollView)
 
-            scrollView.setPadding(
-                dp(28),
-                bars.top + dp(48),
-                dp(28),
-                bars.bottom + dp(32)
+        ViewCompat.setOnApplyWindowInsetsListener(scrollView) { view, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or
+                        WindowInsetsCompat.Type.displayCutout()
+            )
+
+            view.setPadding(
+                dp(24) + bars.left,
+                dp(32) + bars.top,
+                dp(24) + bars.right,
+                dp(32) + bars.bottom
             )
 
             insets
         }
 
-        setContentView(scrollView)
+        ViewCompat.requestApplyInsets(scrollView)
     }
 
     private fun dp(value: Int): Int {
