@@ -19,6 +19,7 @@
     <string name="action_menu">Open menu</string>
     <string name="action_export">Export</string>
     <string name="action_import">Import</string>
+    <string name="action_about">About</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_replace">Replace</string>
 
@@ -41,6 +42,8 @@
 
     <string name="about_title">About Contextium</string>
     <string name="about_author">Developed with ♥️ by xcy7e</string>
+    <string name="about_author_link_text">xcy7e</string>
+    <string name="about_author_link">https://www.xcy7e.de</string>
     <string name="about_version">Version %1$s</string>
     <string name="about_github">GitHub-Repository</string>
     <string name="about_description">Contextium extends the Android-Contextmenu on selected texts with individual configurable menu items to run web searches. Select text anywhere, choose \'Contextium\' and open the selection in your configured URL.\nThis allows you to pass any selection to search engines and search forms of almost any kind.</string>

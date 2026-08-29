@@ -1,27 +1,60 @@
-![App Icon](icon.png)
+![Contextium app icon](icon.png)
 
 # Contextium
-> **v1.3.0**
-> 
-> `app.xcy7e.contextium`
 
-Contextium extends the Android-Contextmenu with individual configurable menu items to run web
-searches. Select text in an App, choose \'Contextium\' and open the selection in your configured
-URL.
+Contextium extends Android's native text-selection context menu with configurable actions for web searches. Select text in any app, choose `Contextium`, and open the selected text with one of your configured search URLs.
 
-## Install
+## Installation
 
-You can find the newest version [here](https://github.com/xcy7e/Contextium/releases/).
+Download the latest APK from the [Releases page](https://github.com/xcy7e/Contextium/releases/).
 
-1. Download the APK
-2. Install the APK (you might need to allow installation of foreign apps in your phone's settings)
+1. Download the APK.
+2. Open it with your file manager and install it.
+3. If prompted, allow your file manager to install unknown apps in Android settings.
 
-## How it works
+## Features
 
-|                                                                   |                                                                |
-|:-----------------------------------------------------------------:|:--------------------------------------------------------------:|
-|          Add unlimited context menu entries           |          Define name, label and the URL + parameter..          |
-|          ![Main App Screen](assets/img/MainActivity.jpg)          | ![Context menu entry settings](assets/img/ContextMenuItem.jpg) |
-|                                                                   |                                                                |
-|            Open the native context menu > tap `Contextium`..             |   Select an item to perform  webrequest/search..    | 
-| ![Native android context menu](assets/img/AndroidContextMenu.jpg) |        ![Contextmenu items](assets/img/ContextMenu.jpg)        |
+- Add unlimited context-menu items
+- Configure a name, label, target URL, and URL parameter for each item
+- Reorder entries with drag and drop
+- Enable or disable entries individually
+- Access all configured entries from Android's native text-selection context menu
+- Export and import your configuration as a backup
+
+## How It Works
+
+| | |
+|:---:|:---:|
+| **Add menu entries** | **Configure each entry** |
+| ![Main app screen](assets/img/MainActivity.jpg) | ![Context menu entry settings](assets/img/ContextMenuItem.jpg) |
+| **Select text, then choose `Contextium`** | **Choose an action to start the web search** |
+| ![Native Android context menu](assets/img/AndroidContextMenu.jpg) | ![Contextium item picker](assets/img/ContextMenu.jpg) |
+
+### Requirements
+
+The target website must support search terms passed as a URL parameter.
+
+### URL and Parameter
+
+Enter the target URL and the parameter name used by the website. Contextium automatically adds the required separator (`?` or `&`), the equals sign (`=`), and the URL-encoded selected text.
+
+### Examples
+
+```yaml
+# Example 1: URL without existing parameters
+URL:    https://www.google.com/search
+PARAM:  q
+
+# Selected text: "foobar"
+# Request URL: https://www.google.com/search?q=foobar
+```
+
+```yaml
+# Example 2: URL with an existing parameter
+URL:    https://www.tradingview.com/chart/?x=y
+PARAM:  symbol
+
+# Selected text: "FOO BAR"
+# Request URL: https://www.tradingview.com/chart/?x=y&symbol=FOO%20BAR
+```
+

@@ -265,7 +265,7 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
 
             emptyText.setPadding(
                 sideMargin + bars.left,
-                bars.top + dp(152),
+                bars.top + dp(132),
                 sideMargin + bars.right,
                 bars.bottom
             )
@@ -335,7 +335,7 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
             text = getString(R.string.app_name)
             textSize = 26f
             setTypeface(poiretOneBold, Typeface.BOLD)
-            setPadding(0, 0, 0, dp(24))
+            setPadding(0, 64, 0, dp(24))
         }
 
         val exportButton = drawerButton(getString(R.string.action_export)) {
@@ -350,9 +350,38 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
             )
         }
 
+        val spacer = View(this).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                0,
+                1f
+            )
+        }
+
+        val aboutButton = drawerButton(getString(R.string.action_about)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+
+            startActivity(
+                Intent(
+                    this@ContextMenuItemManagerActivity,
+                    AboutActivity::class.java
+                )
+            )
+        }
+
         drawerContent.addView(drawerTitle)
         drawerContent.addView(exportButton)
         drawerContent.addView(importButton)
+        drawerContent.addView(spacer)
+        drawerContent.addView(
+            aboutButton,
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                dp(56)
+            ).apply {
+                bottomMargin = dp(48)
+            }
+        )
 
         drawerLayout.addView(
             drawerContent,
@@ -714,7 +743,7 @@ private class ContextMenuItemAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
-        val padding = dp(context, 18)
+        val padding = dp(context, 12)
 
         val root = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
@@ -730,18 +759,18 @@ private class ContextMenuItemAdapter(
         }
 
         val title = TextView(context).apply {
-            textSize = 20f
+            textSize = 16f
             setTypeface(typeface, Typeface.BOLD)
             setTextColor(Color.rgb(232, 225, 234))
         }
 
         val label = TextView(context).apply {
-            textSize = 15f
+            textSize = 12f
             setTextColor(Color.rgb(205, 194, 212))
         }
 
         val url = TextView(context).apply {
-            textSize = 14f
+            textSize = 10f
             setTextColor(Color.rgb(170, 165, 176))
             setPadding(0, dp(context, 3), 0, 0)
         }

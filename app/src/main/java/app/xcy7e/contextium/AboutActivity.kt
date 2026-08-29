@@ -1,9 +1,16 @@
 package app.xcy7e.contextium
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.Gravity
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -55,10 +62,44 @@ class AboutActivity : ComponentActivity() {
             setLineSpacing(dp(5).toFloat(), 1f)
         }
 
+        val authorText = getString(R.string.about_author)
+        val linkText = getString(R.string.about_author_link_text)
+        val linkUrl = getString(R.string.about_author_link)
+
         val author = TextView(this).apply {
-            text = getString(R.string.about_author)
             textSize = 14f
             gravity = Gravity.CENTER
+            highlightColor = Color.TRANSPARENT
+            linksClickable = true
+            setLinkTextColor(0xFFB394F7.toInt())
+
+            text = SpannableString(authorText).apply {
+                val start = authorText.indexOf(linkText)
+                val end = start + linkText.length
+
+                if (start >= 0) {
+                    setSpan(
+                        object : ClickableSpan() {
+                            override fun onClick(widget: View) {
+                                widget.context.startActivity(
+                                    Intent(Intent.ACTION_VIEW, linkUrl.toUri())
+                                )
+                            }
+
+                            override fun updateDrawState(textPaint: TextPaint) {
+                                super.updateDrawState(textPaint)
+                                textPaint.isUnderlineText = false
+                                textPaint.color = 0xFFB394F7.toInt()
+                            }
+                        },
+                        start,
+                        end,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+            }
+
+            movementMethod = LinkMovementMethod.getInstance()
         }
 
         val version = TextView(this).apply {
@@ -126,7 +167,7 @@ class AboutActivity : ComponentActivity() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
-                topMargin = dp(64)
+                topMargin = dp(32)
                 bottomMargin = dp(24)
             }
         )
