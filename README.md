@@ -1,12 +1,13 @@
-![Contextium app icon](icon.png)
+<center>
+  <img src="icon.png" alt="Contextium app icon" style="max-width: 100%;">
+  <h1>Contextium</h1>
+</center>
 
-# Contextium
-
-Contextium extends Android's native text-selection context menu with configurable actions for web searches. Select text in any app, choose `Contextium`, and open the selected text with one of your configured search URLs.
+Contextium extends Android's native text-selection context menu with configurable actions for web searches. Select text in apps (e.g. Browser), choose `Contextium`, and open the selected text with one of your configured search URLs.
 
 ## Installation
 
-Download the latest APK from the [Releases page](https://github.com/xcy7e/Contextium/releases/).
+Get the latest APK from the [Releases page](https://github.com/xcy7e/Contextium/releases/latest).
 
 1. Download the APK.
 2. Open it with your file manager and install it.
@@ -16,17 +17,17 @@ Download the latest APK from the [Releases page](https://github.com/xcy7e/Contex
 
 - Add unlimited context-menu items
 - Configure a name, label, target URL, and URL parameter for each item
-- Reorder entries with drag and drop
-- Enable or disable entries individually
+- Reorder entries with drag'n'drop
+- Enable/disable entries individually
 - Access all configured entries from Android's native text-selection context menu
 - Export and import your configuration as a backup
 
 ## How It Works
 
-| **Add menu entries** | **Configure each entry** |
+| 1. Add menu entries | 2. Configure each entry |
 |:---:|:---:|
 | ![Main app screen](assets/img/MainActivity.jpg) | ![Context menu entry settings](assets/img/ContextMenuItem.jpg) |
-| **Select text, then choose `Contextium`** | **Choose an action to start the web search** |
+| **3. Select text, then choose `Contextium`** | **4. Choose an action to start the web search** |
 | ![Native Android context menu](assets/img/AndroidContextMenu.jpg) | ![Contextium item picker](assets/img/ContextMenu.jpg) |
 
 ### Requirements
