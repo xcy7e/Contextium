@@ -1,1 +1,24 @@
-Contextium extends Android's native text-selection context menu with configurable actions for web searches. Select text in apps (e.g. Browser), choose 'Contextium', and open the selected text with one of your configured search URLs.
+<p>Contextium extends Android's native text-selection context menu with configurable actions for web searches.</p>
+
+<p>Select text in an app, choose <strong>Contextium</strong>, and open the selected text with one of your configured search URLs.</p>
+
+<p><strong>Features</strong></p>
+<ul>
+<li>Add unlimited context-menu items.</li>
+<li>Configure a name, label, target URL, and URL parameter for each item.</li>
+<li>Reorder entries with drag and drop.</li>
+<li>Enable or disable entries individually.</li>
+<li>Export and import your configuration as a backup.</li>
+</ul>
+
+<p><strong>How it works</strong></p>
+<ol>
+<li>Add a menu entry.</li>
+<li>Configure its name, URL, and parameter.</li>
+<li>Select text and choose Contextium.</li>
+<li>Choose an action to start the web search.</li>
+</ol>
+
+<p>The target website must support search terms passed as a URL parameter.</p>
+
+<p>For example, use <code>https://www.google.com/search</code> with the parameter <code>q</code>. Contextium then creates a URL such as <code>https://www.google.com/search?q=foobar</code>.</p>
