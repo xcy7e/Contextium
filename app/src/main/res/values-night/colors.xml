@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="hint_focused">#7652C8</color>
-    <color name="hint_default">#000000</color>
-    <color name="link_text">#5E35B1</color>
+    <color name="hint_focused">#C9A9FF</color>
+    <color name="hint_default">#B8B1BC</color>
+    <color name="link_text">#B394F7</color>
 </resources>

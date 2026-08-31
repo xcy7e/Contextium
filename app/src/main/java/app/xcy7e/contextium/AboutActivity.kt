@@ -20,6 +20,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.color.MaterialColors
 import androidx.core.net.toUri
 
 class AboutActivity : ComponentActivity() {
@@ -31,6 +32,9 @@ class AboutActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        val colorOnSurface = MaterialColors.getColor(this, com.google.android.material.R.attr.colorOnSurface, Color.BLACK)
+        val colorLink = getColor(R.color.link_text)
 
         val poiretOneBold = Typeface.create(
             resources.getFont(R.font.poiret_one_regular),
@@ -50,6 +54,7 @@ class AboutActivity : ComponentActivity() {
 
         val heading = TextView(this).apply {
             text = getString(R.string.app_name)
+            setTextColor(colorOnSurface)
             textSize = 40f
             gravity = Gravity.CENTER
         }
@@ -57,6 +62,7 @@ class AboutActivity : ComponentActivity() {
 
         val description = TextView(this).apply {
             text = getString(R.string.about_description)
+            setTextColor(colorOnSurface)
             textSize = 14f
             gravity = Gravity.FILL_HORIZONTAL
             setLineSpacing(dp(5).toFloat(), 1f)
@@ -68,10 +74,11 @@ class AboutActivity : ComponentActivity() {
 
         val author = TextView(this).apply {
             textSize = 14f
+            setTextColor(colorOnSurface)
             gravity = Gravity.CENTER
             highlightColor = Color.TRANSPARENT
             linksClickable = true
-            setLinkTextColor(0xFFB394F7.toInt())
+            setLinkTextColor(colorLink)
 
             text = SpannableString(authorText).apply {
                 val start = authorText.indexOf(linkText)
@@ -89,7 +96,7 @@ class AboutActivity : ComponentActivity() {
                             override fun updateDrawState(textPaint: TextPaint) {
                                 super.updateDrawState(textPaint)
                                 textPaint.isUnderlineText = false
-                                textPaint.color = 0xFFB394F7.toInt()
+                                textPaint.color = colorLink
                             }
                         },
                         start,
@@ -104,12 +111,14 @@ class AboutActivity : ComponentActivity() {
 
         val version = TextView(this).apply {
             text = getString(R.string.about_version, BuildConfig.VERSION_NAME)
+            setTextColor(colorOnSurface)
             textSize = 14f
             gravity = Gravity.CENTER
         }
 
         val githubButton = MaterialButton(this).apply {
             text = getString(R.string.about_github)
+            setTextColor(Color.WHITE)
             textSize = 18f
             cornerRadius = dp(28)
 

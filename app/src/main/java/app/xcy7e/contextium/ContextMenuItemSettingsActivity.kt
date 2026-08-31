@@ -195,10 +195,16 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
             helperText = getString(helperRes)
             isHintEnabled = true
 
-            hintTextColor = ContextCompat.getColorStateList(
+            val hintColors = ContextCompat.getColorStateList(
                 this@ContextMenuItemSettingsActivity,
                 R.color.text_input_hint_color
             )
+
+            // Color when focused/flying
+            hintTextColor = hintColors
+
+            // Default color
+            defaultHintTextColor = hintColors
         }
 
         val input = TextInputEditText(wrapper.context).apply {

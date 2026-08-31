@@ -6,12 +6,12 @@
         <!-- General Colors -->
         <item name="colorPrimary">#7652C8</item>
         <item name="colorOnPrimary">#FFFFFF</item>
-        <item name="colorSurface">#141217</item>
-        <item name="colorOnSurface">#E8E1EA</item>
+        <item name="colorSurface">#FFFBFF</item>
+        <item name="colorOnSurface">#1C1B1F</item>
 
         <!-- Icon colors for system bars -->
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
 
         <!-- Corrected System Bar Colors -->
         <item name="android:statusBarColor">@android:color/transparent</item>
