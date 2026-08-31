@@ -12,13 +12,13 @@
 </ul>
 
 <p><strong>How it works</strong></p>
-<ol>
+<ul>
 <li>Add a menu entry.</li>
 <li>Configure its name, URL, and parameter.</li>
 <li>Select text and choose Contextium.</li>
 <li>Choose an action to start the web search.</li>
-</ol>
+</ul>
 
 <p>The target website must support search terms passed as a URL parameter.</p>
 
-<p>For example, use <code>https://www.google.com/search</code> with the parameter <code>q</code>. Contextium then creates a URL such as <code>https://www.google.com/search?q=foobar</code>.</p>
+<p>For example, use <i>https://www.google.com/search</i> with the parameter <i>q</i>. Contextium then creates a URL such as <i>https://www.google.com/search?q=foobar</i>.</p>
