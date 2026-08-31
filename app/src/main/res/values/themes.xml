@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Contextium" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:fontFamily">@font/montserrat_variable</item>
+        <item name="android:fontFamily">sans-serif</item>
 
         <!-- General Colors -->
         <item name="colorPrimary">#7652C8</item>

@@ -62,46 +62,50 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
         val form = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
         }
-        val montserratBold = Typeface.create(
-            resources.getFont(R.font.montserrat_variable),
-            Typeface.BOLD
-        )
+        val isDark = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) ==
+                android.content.res.Configuration.UI_MODE_NIGHT_YES
+
+        val formTypeface = if (isDark) {
+            Typeface.create(resources.getFont(R.font.montserrat_variable), Typeface.BOLD)
+        } else {
+            Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+        }
 
         titleInput = addInput(
             form,
             R.string.field_title,
-            R.string.field_title_helper
+            R.string.field_title_helper,
+            formTypeface
         )
-        titleInput.setTypeface(montserratBold)
 
         labelInput = addInput(
             form,
             R.string.field_label,
-            R.string.field_label_helper
+            R.string.field_label_helper,
+            formTypeface
         )
-        labelInput.setTypeface(montserratBold)
 
         urlInput = addInput(
             form,
             R.string.field_url,
             R.string.field_url_helper,
+            formTypeface,
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI
         )
-        urlInput.setTypeface(montserratBold)
 
         urlParamInput = addInput(
             form,
             R.string.field_url_param,
-            R.string.field_url_param_helper
+            R.string.field_url_param_helper,
+            formTypeface
         )
-        urlParamInput.setTypeface(montserratBold)
 
         enabledInput = MaterialCheckBox(this).apply {
             text = getString(R.string.field_enabled)
             isChecked = true
             setPadding(0, dp(17), 0, dp(16))
         }
-        enabledInput.setTypeface(montserratBold)
+        enabledInput.setTypeface(formTypeface)
 
         val saveButton = MaterialButton(
             this,
@@ -110,7 +114,7 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
         ).apply {
             text = getString(R.string.action_save)
             textSize = 16f
-            typeface = montserratBold
+            typeface = formTypeface
             cornerRadius = dp(28)
             backgroundTintList = ColorStateList.valueOf(0xFF7652C8.toInt())
             setTextColor(0xFFFFFFFF.toInt())
@@ -124,7 +128,7 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
         ).apply {
             text = getString(R.string.action_delete)
             textSize = 16f
-            typeface = montserratBold
+            typeface = formTypeface
             cornerRadius = dp(28)
             backgroundTintList = ColorStateList.valueOf(0xFF353238.toInt())
             setTextColor(0xFFE8E1EA.toInt())
@@ -188,12 +192,14 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
         form: LinearLayout,
         labelRes: Int,
         helperRes: Int,
+        typeface: Typeface?,
         inputType: Int = InputType.TYPE_CLASS_TEXT
     ): TextInputEditText {
         val wrapper = TextInputLayout(this).apply {
             hint = getString(labelRes)
             helperText = getString(helperRes)
             isHintEnabled = true
+            setTypeface(typeface)
 
             val hintColors = ContextCompat.getColorStateList(
                 this@ContextMenuItemSettingsActivity,
@@ -210,6 +216,7 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
         val input = TextInputEditText(wrapper.context).apply {
             this.inputType = inputType
             setSingleLine(true)
+            setTypeface(typeface)
         }
 
         wrapper.addView(
