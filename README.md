@@ -1,18 +1,14 @@
 ![Contextium app icon](icon.png)
 
 # Contextium
-
+    
 Contextium extends Android's native text-selection context menu with configurable actions for web
 searches. Select text in apps (e.g. Browser), choose `Contextium`, and open the selected text with
 one of your configured search URLs.
 
-## Installation
-
-Get the latest APK from the [Releases page](https://github.com/xcy7e/Contextium/releases/latest).
-
-1. Download the APK.
-2. Open it with your file manager and install it.
-3. If prompted, allow your file manager to install unknown apps in Android settings.
+[<img src="https://f-droid.org/badge/get-it-on.png"
+    alt="Get it on F-Droid"
+    height="80">](https://f-droid.org/packages/app.xcy7e.contextium)
 
 ## Features
 
@@ -22,6 +18,24 @@ Get the latest APK from the [Releases page](https://github.com/xcy7e/Contextium/
 - Enable/disable entries individually
 - Access all configured entries from Android's native text-selection context menu
 - Export and import your configuration as a backup
+
+
+## Installation
+
+### App Store
+
+#### F-Droid (recommended)
+1. Open **F-Droid App** and search for `Contextium` to install
+2. Or go to the [F-Droid Website](https://f-droid.org/packages/app.xcy7e.contextium) 
+
+### Manual
+
+Get the latest APK from the [Releases page](https://github.com/xcy7e/Contextium/releases/latest).
+
+1. Download the APK.
+2. Open it with your file manager and install it.
+3. If prompted, allow your file manager to install unknown apps in Android settings.
+
 
 ## How It Works
 
@@ -63,4 +77,6 @@ PARAM: symbol
 ---
 
 ## Weblinks
+
+- [Repository on Github](https://github.com/xcy7e/Contextium)
 - Privacy Policy can be found [here](https://contextium.xcy7e.app/privacy) or in `PRIVACY.md` in this repository
