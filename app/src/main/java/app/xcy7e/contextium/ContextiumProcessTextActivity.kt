@@ -9,11 +9,19 @@ class ContextiumProcessTextActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val selectedText = intent
-            .getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)
-            ?.toString()
-            ?.trim()
-            .orEmpty()
+        val selectedText = when (intent.action) {
+            Intent.ACTION_PROCESS_TEXT ->
+                intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)
+                    ?.toString()
+                    ?.trim()
+                    .orEmpty()
+            Intent.ACTION_SEND ->
+                intent.getCharSequenceExtra(Intent.EXTRA_TEXT)
+                    ?.toString()
+                    ?.trim()
+                    .orEmpty()
+            else -> ""
+        }
 
         if (selectedText.isNotEmpty()) {
             startActivity(
