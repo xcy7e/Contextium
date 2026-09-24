@@ -13,8 +13,8 @@ android {
         applicationId = "app.xcy7e.contextium"
         minSdk = 31
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.3.6"
+        versionCode = 4
+        versionName = "1.4.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
