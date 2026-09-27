@@ -54,7 +54,8 @@ The target website must support passing search terms via URL parameters.
 
 ### URL and Parameter
 
-Enter the target URL and the parameter name used by the website. Contextium builds the final URL when text is selected.
+Enter the target URL. Contextium builds the final URL when text is selected.
+You **can** set a parameter name (like `q=%s`) but you can also pass the selected text without a named parameter (as some websites require), like `https://foo.bar.com/%s`.
 
 You can determine the correct search parameter by performing a search on the website and inspecting the resulting URL.
 For example, if you search for `Computer Mouse`, the URL might look like this:
@@ -82,6 +83,15 @@ PARAM: symbol
 
 # Selected text: "FOO BAR"
 # Request URL: https://www.tradingview.com/chart/?x=y&symbol=FOO%20BAR
+```
+
+```yaml
+# Example 3: URL without a named parameter
+URL: https://www.example.com/%s
+PARAM: none
+
+# Selected text: "FOO BAR"
+# Request URL: https://www.example.com/FOO%20BAR
 ```
 
 ## Usage suggestions
