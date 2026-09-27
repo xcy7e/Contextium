@@ -590,7 +590,6 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
                             put("title", item.title)
                             put("label", item.label)
                             put("url", item.url)
-                            put("urlParam", item.urlParam)
                             put("enabled", item.enabled)
                             put("sortOrder", item.sortOrder)
                         }
@@ -599,7 +598,7 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
 
                 val root = JSONObject().apply {
                     put("format", "contextium-backup")
-                    put("version", 1)
+                    put("version", 2)
                     put("items", jsonItems)
                 }
 
@@ -652,9 +651,10 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
 
                 val backup = JSONObject(jsonText)
 
+                val version = backup.optInt("version", 1)
                 if (
                     backup.optString("format") != "contextium-backup" ||
-                    backup.optInt("version") != 1
+                    version !in 1..2
                 ) {
                     error("Unbekanntes Backup-Format.")
                 }
@@ -668,14 +668,19 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
 
                     val title = jsonItem.getString("title").trim()
                     val label = jsonItem.getString("label").trim()
-                    val url = jsonItem.getString("url").trim()
-                    val urlParam = jsonItem.getString("urlParam").trim()
+                    var url = jsonItem.getString("url").trim()
+                    val urlParam = jsonItem.optString("urlParam", "").trim()
+
+                    if (urlParam.isNotEmpty()) {
+                        val separator = if (url.contains("?")) "&" else "?"
+                        url = "$url$separator$urlParam=%s"
+                    }
 
                     if (
                         title.isEmpty() ||
                         label.isEmpty() ||
                         url.isEmpty() ||
-                        urlParam.isEmpty()
+                        !url.contains("%s")
                     ) {
                         error("Ungültiger Eintrag.")
                     }
@@ -684,7 +689,6 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
                         title = title,
                         label = label,
                         url = url,
-                        urlParam = urlParam,
                         enabled = jsonItem.optBoolean("enabled", true),
                         sortOrder = index,
                         createdAt = now,

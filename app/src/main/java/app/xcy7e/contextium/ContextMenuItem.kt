@@ -18,7 +18,6 @@ data class ContextMenuItem(
     val title: String,
     val label: String,
     val url: String,
-    val urlParam: String,
 
     val enabled: Boolean = true,
     val sortOrder: Int = 0,

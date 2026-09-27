@@ -1,0 +1,4 @@
+<ul>
+<li>Implement %s as a placeholder.</li>
+<li>Removes the need for a parameter name.</li>
+</ul>

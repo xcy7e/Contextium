@@ -38,7 +38,6 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
     private lateinit var titleInput: TextInputEditText
     private lateinit var labelInput: TextInputEditText
     private lateinit var urlInput: TextInputEditText
-    private lateinit var urlParamInput: TextInputEditText
     private lateinit var enabledInput: MaterialCheckBox
     private lateinit var deleteButton: MaterialButton
 
@@ -91,13 +90,6 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
             R.string.field_url_helper,
             formTypeface,
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI
-        )
-
-        urlParamInput = addInput(
-            form,
-            R.string.field_url_param,
-            R.string.field_url_param_helper,
-            formTypeface
         )
 
         enabledInput = MaterialCheckBox(this).apply {
@@ -254,7 +246,6 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
                 titleInput.setText(item.title)
                 labelInput.setText(item.label)
                 urlInput.setText(item.url)
-                urlParamInput.setText(item.urlParam)
                 enabledInput.isChecked = item.enabled
                 deleteButton.visibility = View.VISIBLE
             }
@@ -265,12 +256,21 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
         val itemTitle = titleInput.text?.toString()?.trim().orEmpty()
         val label = labelInput.text?.toString()?.trim().orEmpty()
         val url = urlInput.text?.toString()?.trim().orEmpty()
-        val urlParam = urlParamInput.text?.toString()?.trim().orEmpty()
 
-        if (itemTitle.isEmpty() || label.isEmpty() || url.isEmpty() || urlParam.isEmpty()) {
+        if (itemTitle.isEmpty() || label.isEmpty() || url.isEmpty()) {
             Toast.makeText(this, R.string.validation_error, Toast.LENGTH_LONG).show()
             return
         }
+
+        if (!url.contains("%s")) {
+            Toast.makeText(
+                this,
+                R.string.validation_url_placeholder_error,
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
         val parsedUrl = url.toUri()
 
         if (
@@ -296,7 +296,6 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
                             title = itemTitle,
                             label = label,
                             url = url,
-                            urlParam = urlParam,
                             enabled = enabledInput.isChecked,
                             sortOrder = dao.getMaxSortOrder() + 1,
                             createdAt = now,
@@ -309,7 +308,6 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
                             title = itemTitle,
                             label = label,
                             url = url,
-                            urlParam = urlParam,
                             enabled = enabledInput.isChecked,
                             updatedAt = now
                         )

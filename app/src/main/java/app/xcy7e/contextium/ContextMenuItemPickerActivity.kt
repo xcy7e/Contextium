@@ -190,10 +190,8 @@ class ContextMenuItemPickerActivity : Activity() {
     }
 
     private fun openItem(item: ContextMenuItem, selectedText: String) {
-        val targetUrl = item.url.toUri()
-            .buildUpon()
-            .appendQueryParameter(item.urlParam, selectedText)
-            .build()
+        val formattedUrl = item.url.replace("%s", android.net.Uri.encode(selectedText))
+        val targetUrl = formattedUrl.toUri()
 
         startActivity(Intent(Intent.ACTION_VIEW, targetUrl))
         finish()
