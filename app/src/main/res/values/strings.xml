@@ -50,6 +50,6 @@
 
     <string name="item_label">%1$s</string>
     <string name="field_title_helper">Unique internal item title</string>
-    <string name="field_label_helper">Display name in the context menu selection</string>
+    <string name="field_label_helper">Display name in the context menu selection (optional)</string>
     <string name="field_url_helper">Target URL with %s placeholder\n(e.g. \'https://www.google.com/search?q=%s\')</string>
 </resources>

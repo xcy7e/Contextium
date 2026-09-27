@@ -244,7 +244,7 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
 
                 existingItem = item
                 titleInput.setText(item.title)
-                labelInput.setText(item.label)
+                labelInput.setText(item.label.orEmpty())
                 urlInput.setText(item.url)
                 enabledInput.isChecked = item.enabled
                 deleteButton.visibility = View.VISIBLE
@@ -254,10 +254,10 @@ class ContextMenuItemSettingsActivity : ComponentActivity() {
 
     private fun saveItem() {
         val itemTitle = titleInput.text?.toString()?.trim().orEmpty()
-        val label = labelInput.text?.toString()?.trim().orEmpty()
+        val label = labelInput.text?.toString()?.trim().takeIf { !it.isNullOrEmpty() }
         val url = urlInput.text?.toString()?.trim().orEmpty()
 
-        if (itemTitle.isEmpty() || label.isEmpty() || url.isEmpty()) {
+        if (itemTitle.isEmpty() || url.isEmpty()) {
             Toast.makeText(this, R.string.validation_error, Toast.LENGTH_LONG).show()
             return
         }

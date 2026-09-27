@@ -667,7 +667,7 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
                     val jsonItem = jsonItems.getJSONObject(index)
 
                     val title = jsonItem.getString("title").trim()
-                    val label = jsonItem.getString("label").trim()
+                    val label = jsonItem.optString("label").trim().takeIf { it.isNotEmpty() }
                     var url = jsonItem.getString("url").trim()
                     val urlParam = jsonItem.optString("urlParam", "").trim()
 
@@ -678,7 +678,6 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
 
                     if (
                         title.isEmpty() ||
-                        label.isEmpty() ||
                         url.isEmpty() ||
                         !url.contains("%s")
                     ) {
@@ -790,10 +789,16 @@ private class ContextMenuItemAdapter(
         val item = items[position]
 
         holder.title.text = item.title
-        holder.label.text = holder.itemView.context.getString(
-            R.string.item_label,
-            item.label
-        )
+        val labelText = item.label?.takeIf { it.isNotBlank() }
+        if (labelText != null) {
+            holder.label.visibility = View.VISIBLE
+            holder.label.text = holder.itemView.context.getString(
+                R.string.item_label,
+                labelText
+            )
+        } else {
+            holder.label.visibility = View.GONE
+        }
         holder.url.text = shortenUrl(item.url)
 
         holder.itemView.alpha = if (item.enabled) 1.0f else 0.40f

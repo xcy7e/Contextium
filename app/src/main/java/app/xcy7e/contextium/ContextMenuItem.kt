@@ -16,7 +16,7 @@ data class ContextMenuItem(
     val id: Long = 0,
 
     val title: String,
-    val label: String,
+    val label: String? = null,
     val url: String,
 
     val enabled: Boolean = true,

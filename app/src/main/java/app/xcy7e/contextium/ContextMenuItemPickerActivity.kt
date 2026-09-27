@@ -130,7 +130,9 @@ class ContextMenuItemPickerActivity : Activity() {
                     val textView = (convertView as? TextView)
                         ?: TextView(context)
 
-                    textView.text = getItem(position)?.label.orEmpty()
+                    val item = getItem(position)
+                    val displayLabel = item?.label?.takeIf { it.isNotBlank() } ?: item?.title.orEmpty()
+                    textView.text = displayLabel
                     textView.textSize = 17f
                     textView.setTextColor(Color.rgb(232, 225, 234))
                     textView.setBackgroundColor(Color.rgb(28, 27, 31))
