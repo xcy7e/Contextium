@@ -142,7 +142,7 @@ PARAM: (leave empty)
 ### Example file
 
 You can download and import
-the [example.backup.json](https://github.com/xcy7e/Contextium/blob/master/assets/examples/example.backup.json)
+the [example.backup.json](https://github.com/xcy7e/Contextium/blob/master/examples/example.backup.json)
 file,
 to get a glimpse of what's possible with **Contextium**.
 Simply open the Menu in Contextium (swipe right), tap *Import* and select the `json`-file.
