@@ -1,36 +1,54 @@
-![Contextium app icon](icon.png)
+<div align="center">
 
-# Contextium
-    
-Contextium extends Android's native text-selection context menu with configurable actions for web searches. Select text in almost any app (e.g. your browser), choose **Contextium** from the context menu and open the selected text with one of your custom search URLs.
+<img src="./assets/img/icon-128px.png" width="96" alt="Logo" style="margin-bottom:0;max-width: 100%;" />
 
-Since I search for audiobooks on a daily basis across a variety of websites, I realized that the repeated search steps could be streamlined. Contextium was created to shorten these repetitive workflows by turning them into one‑tap actions directly from Android’s text‑selection menu.
+<h1 style="margin-top:0;max-width: 100%;">Contextium</h1>
 
-[<img src="https://f-droid.org/badge/get-it-on.png"
-    alt="Get it on F-Droid"
-    height="80">](https://f-droid.org/packages/app.xcy7e.contextium)
+[![F-Droid version](https://img.shields.io/f-droid/v/app.xcy7e.contextium?label=F-Droid&logo=f-roid&color=%23b2eb0c)](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/app.xcy7e.contextium.yml)
+[![GitHub version](https://img.shields.io/github/v/release/xcy7e/Contextium?label=Github&logo=github&color=%23ffffff)](https://github.com/xcy7e/Contextium/releases)
+
+Contextium extends Android's native text-selection menu with configurable actions for web searches.
+Select text in almost any app (e.g., your browser), choose **Contextium** from the context menu,
+and open the selected text using one of your custom search URLs.
+
+Since I search for audiobooks daily across various websites, I realized these repeated search steps
+could be streamlined. Contextium was built to simplify these repetitive workflows by turning them
+into one‑tap actions directly from Android’s text‑selection menu.
+
+[<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/app.xcy7e.contextium) [<img src="https://raw.githubusercontent.com/rubenpgrady/get-it-on-github/refs/heads/main/get-it-on-github.png" alt="Get it on Github" height="80">](https://github.com/xcy7e/Contextium/releases/latest)
+
+</div>
+
+---
+
+1. [Features](#Features)
+2. [Installation](#Installation)
+3. [How it works](#How-it-works)
+    - [Requirements](#Requirements)
+    - [How to find out the required URL for the entry?](#How-to-find-out-the-required-URL-for-the-entry)
+    - [URL and Parameter](#URL-and-Parameter)
+4. [Examples](#Examples)
+    - [3 different URL cases](#3-different-URL-cases)
+    - [Example file](#Example-file)
+5. [Usage suggestions](#Usage-suggestions)
 
 ## Features
 
 - Create unlimited context‑menu actions
-- Configure name, label, target URL, and search parameter
-- Reorder actions via drag-and-drop
-- Enable or disable actions individually
+- Configure individual search URLs
 - Access all actions from Android’s native text‑selection menu
 - Export and import your configuration for backup
-
-## Privacy
-Contextium performs simple URL‑based searches and does **not** collect or transmit personal data. All configuration data is stored locally on your device.
+- Reorder actions via drag-and-drop
+- Enable or disable actions individually
 
 ## Installation
 
-### App Store
+### F-Droid (recommended)
 
-#### F-Droid (recommended)
 1. Open **F-Droid App** and search for `Contextium`
-2. Or visit the [F-Droid Website](https://f-droid.org/packages/app.xcy7e.contextium) 
+2. Or visit the [F-Droid Website](https://f-droid.org/packages/app.xcy7e.contextium)
 
-### Manual installation
+### Github
 
 Get the latest APK from the [Releases page](https://github.com/xcy7e/Contextium/releases/latest).
 
@@ -38,34 +56,58 @@ Get the latest APK from the [Releases page](https://github.com/xcy7e/Contextium/
 2. Open it in your file manager to install
 3. If prompted, allow your file manager to install unknown apps
 
+## How it works
 
-## How It Works
 The workflow looks like this:
 
-|                                   1. Add menu entries                                   |                              2. Configure each entry                              |
-|:---------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
-|              ![Main app screen](assets/img/screenshots/1-MainActivity.png)              | ![Context menu entry settings](assets/img/screenshots/2-EditContextMenuEntry.png) |
-|                      **3. Select text, then choose `Contextium`**                       |                  **4. Choose an action to start the web search**                  |
-| ![Native Android context menu](assets/img/screenshots/3-ContextiumContextMenuEntry.png) |   ![Contextium item picker](assets/img/screenshots/4-ContextiumContextMenu.png)   |
+|                                                                              1. Add menu entries                                                                              |                                                                         2. Configure each entry                                                                         |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|              <img src="https://raw.githubusercontent.com/xcy7e/Contextium/master/assets/img/screenshots/1-MainActivity.png" width="280" alt="Main app screen" />              | <img src="https://raw.githubusercontent.com/xcy7e/Contextium/master/assets/img/screenshots/2-EditContextMenuEntry.png" width="280" alt="Context menu entry settings" /> |
+|                                                                 **3. Select text, then choose `Contextium`**                                                                  |                                                             **4. Choose an action to start the web search**                                                             |
+| <img src="https://raw.githubusercontent.com/xcy7e/Contextium/master/assets/img/screenshots/3-ContextiumContextMenuEntry.png" width="280" alt="Native Android context menu" /> |   <img src="https://raw.githubusercontent.com/xcy7e/Contextium/master/assets/img/screenshots/4-ContextiumContextMenu.png" width="280" alt="Contextium item picker" />   |
 
 ### Requirements
 
-The target website must support passing search terms via URL parameters.
+The target website **must** support passing search terms via URL parameter.
+
+I recommend importing the [example backup](#Example-file) for a quick start.
+
+### How to find out the required URL for the entry?
+
+1. Go to the website you want to link in Contextium
+2. Execute the search with any search term and potential filters
+3. View the full URL after submitting the search
+
+    - Check if your search term appears in the URL: If it does, great! If not, this search might
+      not work with Contextium.
+    - Now, replace your search term with `%s`
+    - Then remove any unnecessary parameters and their values (such as hashes, etc.)
+
+4. Enter the modified URL in a Contextium item and give it a try by selecting text in your browser
+   and choose 'Contextium' from the context menu.
 
 ### URL and Parameter
 
 Enter the target URL. Contextium builds the final URL when text is selected.
-You **can** set a parameter name (like `q=%s`) but you can also pass the selected text without a named parameter (as some websites require), like `https://foo.bar.com/%s`.
+You **can** set a parameter name (like `q=%s`) but you can also pass the selected text without a
+named parameter (as some websites require), like `https://foo.bar.com/%s`.
 
-You can determine the correct search parameter by performing a search on the website and inspecting the resulting URL.
+You can determine the correct search parameter by performing a search on the website and inspecting
+the resulting URL.
 For example, if you search for `Computer Mouse`, the URL might look like this:
 
-`https://www.example.com/page/?searched=Computer%20Mouse`
+`https://www.example.com/page/?search=Computer%20Mouse`
 
-In this case, the search parameter is `searched`. It must appear after `?` or `&`, followed by `=`, and then your search term.
-If the URL does not contain your search term, the website is probably using a POST request instead of a GET request. Since POST requests do not expose search terms in the URL, Contextium cannot be used with such websites.
+In this case, the search parameter is `search`. It must appear after `?` or `&`, followed by `=`,
+and then your search term.
+If the URL does not contain your search term, the website is probably using a POST request
+(i.e., the search term is sent in the background, not visible in the address bar) instead
+of a GET request. Since POST requests do not expose search terms in the URL, Contextium cannot be
+used with such websites.
 
-### Examples
+## Examples
+
+### 3 different URL cases
 
 ```yaml
 # Example 1: URL without existing parameters
@@ -73,43 +115,84 @@ URL: https://www.google.com/search
 PARAM: q
 
 # Selected text: "foobar"
-# Request URL: https://www.google.com/search?q=foobar
+# Item URL: https://www.google.com/search?q=%s
+# Result: https://www.google.com/search?q=foobar
 ```
 
 ```yaml
-# Example 2: URL with other existing parameters
+# Example 2: URL with additional parameters
 URL: https://www.tradingview.com/chart/?x=y
 PARAM: symbol
 
 # Selected text: "FOO BAR"
-# Request URL: https://www.tradingview.com/chart/?x=y&symbol=FOO%20BAR
+# Item URL: https://www.tradingview.com/chart/?x=y&symbol=%s
+# Result: https://www.tradingview.com/chart/?x=y&symbol=FOO%20BAR
 ```
 
 ```yaml
 # Example 3: URL without a named parameter
 URL: https://www.example.com/%s
-PARAM: none
+PARAM: (leave empty)
 
 # Selected text: "FOO BAR"
-# Request URL: https://www.example.com/FOO%20BAR
+# Item URL: https://www.example.com/%s
+# Result: https://www.example.com/FOO%20BAR
 ```
 
+### Example file
+
+You can download and import
+the [example.backup.json](https://github.com/xcy7e/Contextium/blob/master/assets/examples/example.backup.json)
+file,
+to get a glimpse of what's possible with **Contextium**.
+Simply open the Menu in Contextium (swipe right), tap *Import* and select the `json`-file.
+If you already have items, you might want to back up them first.
+
+The Example file contains numerous working example entries:
+
+- Ask AI (ChatGPT, Gemini, Claude, …)
+- Search web (Wikipedia, Google, DuckDuckGo, Internet Archive, …)
+- Search media (Google Images, OpenLibrary, iMDB, Audible, Goodreads, …)
+- Search products (Amazon, eBay, …)
+- Search forums (Reddit, StackOverflow, …)
+- Developer tools (github, npm, packagist, urlscan.io, …)
+- ...
+
+This file is meant to help you understanding the different types of URLs, some are short, some are
+longer with additional parameter, and some without a named parameter.
+You can of course remove unwanted entries and customize it as you like.
+
 ## Usage suggestions
-Here are some ideas for what Contextium is useful for. Anything you regularly search on the same page is *perfectly suited* for Contextium.
-You could search for..
+
+Here you'll find some inspiration for how Contextium can be used. 
+This is just a selection – **you can add any website** that supports URL-based searches.
+
+Anything you regularly search for regularly is *perfectly suited* for Contextium.
+
+You could, for example, search for...
+
+- **AI** (ChatGPT, Gemini, Claude, Grok, Perplexity, …)
+- **Search engines** (Google, DuckDuckGo, Bing, Metacrawler, …)
 - **Books** (Google Books, Goodreads, …)
 - **Audiobooks** (Audible, BookBeat, …)
-- **Products** (Amazon, Walmart, Alibaba, …)
+- **Products** (Amazon, eBay, Walmart, Alibaba, …)
 - **Stocks** (Yahoo Finance, Google Finance, MarketWatch, …)
-- **Movies** (IMDb, Letterboxd, Rotten Tomatoes, …)
+- **Movies** (Youtube, Rumble, IMDb, Letterboxd, Rotten Tomatoes, …)
 - **TV shows** (TheTVDB, JustWatch, …)
 - **Music** (Spotify, Apple Music, Discogs, …)
 - **Games** (Steam, Metacritic, IGDB, …)
-- **Recipes**, **Translations**, **Academic topics**, **Patents**, **Jobs** and more..
+- **Developer tools** (Whois, encryption, scanner, …)
+- **Recipes**, **Translators**, **Academic topics**, **Patents**, **Jobs** and more...
 
 ---
 
 ## Weblinks
 
 - [Repository on Github](https://github.com/xcy7e/Contextium)
-- The privacy policy is available [here](https://contextium.xcy7e.app/privacy) and in `PRIVACY.md` in this repository
+- The privacy policy is available [here](https://contextium.xcy7e.app/privacy) and in the
+  `PRIVACY.md` file in this repository.
+
+## Privacy
+
+Contextium performs simple URL‑based searches and does **not** collect or transmit personal data.
+All configuration data is stored locally on your device.
