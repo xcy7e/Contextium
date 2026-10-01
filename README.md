@@ -26,7 +26,6 @@ into one‑tap actions directly from Android’s text‑selection menu.
 3. [How it works](#How-it-works)
     - [Requirements](#Requirements)
     - [How to find out the required URL for the entry?](#How-to-find-out-the-required-URL-for-the-entry)
-    - [URL and Parameter](#URL-and-Parameter)
 4. [Examples](#Examples)
     - [3 different URL cases](#3-different-URL-cases)
     - [Example file](#Example-file)
@@ -80,30 +79,16 @@ I recommend importing the [example backup](#Example-file) for a quick start.
 
     - Check if your search term appears in the URL: If it does, great! If not, this search might
       not work with Contextium.
-    - Now, replace your search term with `%s`
+
+        - For example, if you searched for `Computer Mouse`, the URL might look like this:\
+          `https://www.example.com/page/?search=Computer%20Mouse`
+
+    - Now, replace your search term with `%s`:\
+      `https://www.example.com/page/?search=%s`
     - Then remove any unnecessary parameters and their values (such as hashes, etc.)
 
 4. Enter the modified URL in a Contextium item and give it a try by selecting text in your browser
    and choose 'Contextium' from the context menu.
-
-### URL and Parameter
-
-Enter the target URL. Contextium builds the final URL when text is selected.
-You **can** set a parameter name (like `q=%s`) but you can also pass the selected text without a
-named parameter (as some websites require), like `https://foo.bar.com/%s`.
-
-You can determine the correct search parameter by performing a search on the website and inspecting
-the resulting URL.
-For example, if you search for `Computer Mouse`, the URL might look like this:
-
-`https://www.example.com/page/?search=Computer%20Mouse`
-
-In this case, the search parameter is `search`. It must appear after `?` or `&`, followed by `=`,
-and then your search term.
-If the URL does not contain your search term, the website is probably using a POST request
-(i.e., the search term is sent in the background, not visible in the address bar) instead
-of a GET request. Since POST requests do not expose search terms in the URL, Contextium cannot be
-used with such websites.
 
 ## Examples
 
@@ -164,10 +149,10 @@ You can of course remove unwanted entries and customize it as you like.
 
 ## Usage suggestions
 
-Here you'll find some inspiration for how Contextium can be used. 
+Here you'll find some inspiration for how Contextium can be used.
 This is just a selection – **you can add any website** that supports URL-based searches.
 
-Anything you regularly search for regularly is *perfectly suited* for Contextium.
+Anything you regularly search for is *perfectly suited* for Contextium.
 
 You could, for example, search for...
 
@@ -194,5 +179,7 @@ You could, for example, search for...
 
 ## Privacy
 
-Contextium performs simple URL‑based searches and does **not** collect or transmit personal data.
+Contextium performs simple URL‑based search requests through your default browser app and therefor
+does **not** collect or transmit personal data.
+
 All configuration data is stored locally on your device.
