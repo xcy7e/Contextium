@@ -1,0 +1,191 @@
+{
+  "format": "contextium-backup",
+  "version": 2,
+  "items": [
+    {
+      "title": "ChatGPT • AI",
+      "label": "Ask ChatGPT",
+      "url": "https:\/\/chatgpt.com\/?q=%s",
+      "enabled": true,
+      "sortOrder": 0
+    },
+    {
+      "title": "Gemini • AI",
+      "label": "Ask Gemini",
+      "url": "https:\/\/www.google.com\/search?udm=50&q=%s",
+      "enabled": true,
+      "sortOrder": 1
+    },
+    {
+      "title": "Claude • AI",
+      "label": "Ask Claude",
+      "url": "https:\/\/claude.ai\/new?q=%s",
+      "enabled": true,
+      "sortOrder": 2
+    },
+    {
+      "title": "Perplexity • AI",
+      "label": "Ask Perplexity",
+      "url": "https:\/\/www.perplexity.ai\/search?q=%s",
+      "enabled": true,
+      "sortOrder": 3
+    },
+    {
+      "title": "Grok • AI",
+      "label": "Ask Grok",
+      "url": "https:\/\/grok.com\/?q=%s",
+      "enabled": true,
+      "sortOrder": 4
+    },
+    {
+      "title": "Google • Web search",
+      "label": "Google",
+      "url": "https:\/\/www.google.com\/search?q=%s",
+      "enabled": true,
+      "sortOrder": 5
+    },
+    {
+      "title": "Google • Image search",
+      "label": "Find movie cover",
+      "url": "https:\/\/www.google.com\/search?q=%s+movie+cover&udm=2",
+      "enabled": true,
+      "sortOrder": 6
+    },
+    {
+      "title": "iMDB • Search movie",
+      "label": "iMDB",
+      "url": "https:\/\/www.imdb.com\/find\/?q=%s",
+      "enabled": true,
+      "sortOrder": 7
+    },
+    {
+      "title": "Audible • Search audiobook",
+      "label": "Audible (only when confirmed us\/.com)",
+      "url": "https:\/\/www.audible.com\/search?keywords=%s&sprefix=fo%2Cna-audible-us%2C311&i=na-audible-us&url=search-alias%3Dna-audible-us",
+      "enabled": true,
+      "sortOrder": 8
+    },
+    {
+      "title": "Amazon • Search products",
+      "label": "Amazon",
+      "url": "https:\/\/www.amazon.com\/s?k=%s",
+      "enabled": true,
+      "sortOrder": 9
+    },
+    {
+      "title": "Github • Search repository",
+      "url": "https:\/\/github.com\/search?q=%s&type=repositories",
+      "enabled": true,
+      "sortOrder": 10
+    },
+    {
+      "title": "Wikipedia • Search article",
+      "url": "https:\/\/en.wikipedia.org\/wiki\/%s",
+      "enabled": true,
+      "sortOrder": 11
+    },
+    {
+      "title": "Wikipedia • Search article (german)",
+      "url": "https:\/\/de.wikipedia.org\/wiki\/%s",
+      "enabled": true,
+      "sortOrder": 12
+    },
+    {
+      "title": "Wikipedia • Search articles that begin with..",
+      "url": "https:\/\/en.wikipedia.org\/wiki\/Special:PrefixIndex\/%s",
+      "enabled": true,
+      "sortOrder": 13
+    },
+    {
+      "title": "Wayback Machine • Search the Internet Archive",
+      "url": "https:\/\/web.archive.org\/web\/*\/%s",
+      "enabled": true,
+      "sortOrder": 14
+    },
+    {
+      "title": "Goodreads • Search author",
+      "url": "https:\/\/www.goodreads.com\/search?tab=books&filter=author&q=%s",
+      "enabled": true,
+      "sortOrder": 15
+    },
+    {
+      "title": "Goodreads • Search book",
+      "url": "https:\/\/www.goodreads.com\/search?tab=books&filter=title&q=%s",
+      "enabled": true,
+      "sortOrder": 16
+    },
+    {
+      "title": "Youtube • Search video",
+      "url": "https:\/\/www.youtube.com\/results?search_query=%s",
+      "enabled": true,
+      "sortOrder": 17
+    },
+    {
+      "title": "DuckDuckGo • Search the internet",
+      "url": "https:\/\/duckduckgo.com\/?q=%s",
+      "enabled": true,
+      "sortOrder": 18
+    },
+    {
+      "title": "StackOverflow • Search thread",
+      "url": "https:\/\/stackoverflow.com\/search?q=%s",
+      "enabled": true,
+      "sortOrder": 19
+    },
+    {
+      "title": "NPM • Search package",
+      "url": "https:\/\/www.npmjs.com\/search?q=%s",
+      "enabled": true,
+      "sortOrder": 20
+    },
+    {
+      "title": "Packagist • Search package",
+      "label": "Search composer package",
+      "url": "https:\/\/packagist.org\/search\/?query=%s",
+      "enabled": true,
+      "sortOrder": 21
+    },
+    {
+      "title": "OpenLibrary • Search media",
+      "url": "https:\/\/openlibrary.org\/search?q=%s",
+      "enabled": true,
+      "sortOrder": 22
+    },
+    {
+      "title": "OpenLibrary • Search media (french)",
+      "url": "https:\/\/openlibrary.org\/search?q=%s&language=fre",
+      "enabled": true,
+      "sortOrder": 23
+    },
+    {
+      "title": "Google • Translate (EN -> FR)",
+      "url": "https:\/\/translate.google.com\/?sl=en&tl=fr&text=%s&op=translate",
+      "enabled": true,
+      "sortOrder": 24
+    },
+    {
+      "title": "Reddit • Search (everywhere)",
+      "url": "https:\/\/www.reddit.com\/search\/?q=%s",
+      "enabled": true,
+      "sortOrder": 25
+    },
+    {
+      "title": "Reddit • Search media (hot)",
+      "url": "https:\/\/www.reddit.com\/search\/?q=%s&type=media&sort=hot",
+      "enabled": true,
+      "sortOrder": 26
+    },
+    {
+      "title": "eBay • Search product (free shipping)",
+      "url": "https:\/\/www.ebay.de\/sch\/i.html?_nkw=%s&LH_FS=1",
+      "enabled": true,
+      "sortOrder": 27
+    },
+    {
+      "title": "URLscan.io • Search (domain, ip, filename, hash, asn)",
+      "url": "https:\/\/urlscan.io\/search\/#%s",
+      "enabled": true,
+      "sortOrder": 28
+    }
+  ]
+}
