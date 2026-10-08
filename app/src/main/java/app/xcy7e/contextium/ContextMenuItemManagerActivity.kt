@@ -619,27 +619,35 @@ class ContextMenuItemManagerActivity : ComponentActivity() {
         }
     }
 
+    /** Import backup */
     private fun confirmImport(uri: Uri) {
-        val dialog = AlertDialog.Builder(this)
-            .setTitle(R.string.import_confirm_title)
-            .setMessage(R.string.import_confirm_message)
-            .setNegativeButton(R.string.action_cancel, null)
-            .setPositiveButton(R.string.action_replace) { _, _ ->
-                importItems(uri)
+        if (adapter.getItems().isNotEmpty()) {
+            // Warning: Existing items will be wiped on import
+            val dialog = AlertDialog.Builder(this)
+                .setTitle(R.string.import_confirm_title)
+                .setMessage(R.string.import_confirm_message)
+                .setNegativeButton(R.string.action_cancel, null)
+                .setPositiveButton(R.string.action_replace) { _, _ ->
+                    importItems(uri)
+                }
+                .create()
+
+            dialog.setOnShowListener {
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                    .setTextColor(Color.WHITE)
+
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    .setTextColor(0xFFB598FA.toInt())
             }
-            .create()
 
-        dialog.setOnShowListener {
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-                .setTextColor(Color.WHITE)
-
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                .setTextColor(0xFFB598FA.toInt())
+            dialog.show()
+        } else {
+            // No items: Start import
+            importItems(uri)
         }
-
-        dialog.show()
     }
 
+    /** Import backup */
     private fun importItems(uri: Uri) {
         databaseExecutor.execute {
             try {
