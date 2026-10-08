@@ -47,12 +47,13 @@ jobs:
 
       - name: Scan APK with VirusTotal
         run: |
+          echo "APK_PATH from workflow: $APK_PATH"
+          export APK_PATH="${{ steps.find-apk.outputs.apk_path }}"
           python -m pip install requests
           python vt_scan.py
         env:
           VT_API_KEY: ${{ secrets.VIRUSTOTAL_API_KEY }}
           VT_COMMENT: "Release ${{ github.event.release.tag_name }} – ${{ github.event.release.name }}"
-          APK_PATH: ${{ steps.find-apk.outputs.apk_path }}
 
       - name: Configure Git
         run: |

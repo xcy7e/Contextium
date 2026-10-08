@@ -6,6 +6,15 @@ from pathlib import Path
 
 import requests
 
+print("=== ENV DUMP ===")
+for k, v in sorted(os.environ.items()):
+    if k in ("APK_PATH", "VT_API_KEY", "VT_COMMENT", "GITHUB_*"):
+        print(f"{k} = {v}")
+print("===============")
+
+if "APK_PATH" not in os.environ:
+    raise RuntimeError("APK_PATH is not set in environment")
+
 API_KEY = os.environ["VT_API_KEY"]
 APK_PATH = Path(os.environ["APK_PATH"])
 OUTPUT_JSON = "vt-badge.json"
