@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Redirecting to latest VirusTotal report…</title>
     <script>
-        fetch('https://raw.githubusercontent.com/xcy7e/Contextium/vt-badge/vt-badge.json')
+        fetch('https://raw.githubusercontent.com/xcy7e/Contextium/refs/heads/master/vt-badge.json')
           .then(r => r.json())
           .then(data => {
             if (data && data.url) {
