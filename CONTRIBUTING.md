@@ -17,7 +17,6 @@ It will make it a lot easier for the maintainers and smooth out the experience f
 
 ## Table of Contents
 
-- [Code of Conduct](#code-of-conduct)
 - [I Have a Question](#i-have-a-question)
     - [I Want To Contribute](#i-want-to-contribute)
     - [Finding A Good First Issue](#finding-a-good-first-issue)
@@ -30,17 +29,10 @@ It will make it a lot easier for the maintainers and smooth out the experience f
     - [Commit Messages](#commit-messages)
     - [Code Comments](#code-comments)
 
-## Code of Conduct
-
-This project and everyone participating in it is governed by the
-[Contextium Code of Conduct](https://github.com/xcy7e/Contextium/blob/master/CODE_OF_CONDUCT.md).
-By participating, you are expected to uphold this code. Please report unacceptable behavior
-to <john@xcy7e.de>.
-
 ## I Have a Question
 
 > If you want to ask a question, it's assumed that you have read the
-> available [Documentation](https://github.com/xcy7e/Contextium/blob/master/README.md).
+> available [Documentation](https://raw.githubusercontent.com/xcy7e/Contextium/master/README.md).
 
 Before you ask a question, it is best to search for
 existing [Issues](https://github.com/xcy7e/Contextium/issues) that might help you. In case you have
@@ -71,7 +63,7 @@ Depending on how large the project is, you may want to outsource the questioning
 > ### Legal Notice
 > When contributing to this project, you must agree that you have authored 100% of the content, that
 > you have the necessary rights to the content and that the content you contribute may be provided
-> under the project licence.
+> under the [project licence](https://github.com/xcy7e/Contextium/blob/master/LICENSE).
 
 ### Finding A Good First Issue
 
@@ -151,7 +143,7 @@ suggestions.
 #### Before Submitting an Enhancement
 
 - Make sure that you are using the latest version.
-- Read the [documentation](https://github.com/xcy7e/Contextium/blob/master/README.md) carefully and
+- Read the [documentation](https://raw.githubusercontent.com/xcy7e/Contextium/master/README.md) carefully and
   find out if the functionality is already covered, maybe by an individual configuration.
 - Perform a [search](https://github.com/xcy7e/Contextium/issues) to see if the enhancement has
   already been suggested. If it has, add a comment to the existing issue instead of opening a new
@@ -269,7 +261,7 @@ executed after on another.
 
 When contributing new features, fixing bugs, or changing UI components, please check if your changes
 affect the documentation. Make sure to update
-the [README.md](https://github.com/xcy7e/Contextium/blob/master/README.md) (or relevant doc files)
+the [README.md](https://raw.githubusercontent.com/xcy7e/Contextium/master/README.md) (or relevant doc files)
 accordingly. If
 your changes affect the user interface or visual workflows, please update any existing screenshots
 or add new ones to reflect the current state. Keeping docs and visuals accurate helps everyone!
@@ -293,4 +285,4 @@ piece of logic should be explained in the shortest possible way.
 
 ## Attribution
 
-This guide is based on the [contributing.md](https://contributing.md/generator)!
+This guide is based on the [contributing.md](https://contributing.md/generator) generator!
