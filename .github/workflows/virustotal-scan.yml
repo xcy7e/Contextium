@@ -60,12 +60,15 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Push badge JSON to vt-badge branch
+      - name: Commit badge JSON to main branch
         run: |
-          git fetch origin vt-badge --depth=1 || true
-          git checkout --orphan vt-badge
-          git rm -rf .
-          cp vt-badge.json .
-          git add vt-badge.json
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add .github/vt-badge.json
+          # Only commit if content changed
+          git diff --cached --quiet && echo "No changes to commit" && exit 0 || true
           git commit -m "Update VirusTotal badge for ${{ github.event.release.tag_name }}"
-          git push -f origin vt-badge
+          git push
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

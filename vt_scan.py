@@ -17,7 +17,7 @@ if "APK_PATH" not in os.environ:
 
 API_KEY = os.environ["VT_API_KEY"]
 APK_PATH = Path(os.environ["APK_PATH"])
-OUTPUT_JSON = "vt-badge.json"
+OUTPUT_JSON = Path(".github/vt-badge.json")
 COMMENT_TEXT = os.environ.get(
     "VT_COMMENT",
     "Automated release scan"

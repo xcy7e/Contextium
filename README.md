@@ -6,7 +6,7 @@
 
 [![F-Droid version](https://img.shields.io/f-droid/v/app.xcy7e.contextium?label=F-Droid&logo=f-roid&color=%23b2eb0c)](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/app.xcy7e.contextium.yml)
 [![GitHub version](https://img.shields.io/github/v/release/xcy7e/Contextium?label=Github&logo=github&color=%23ffffff)](https://github.com/xcy7e/Contextium/releases)
-[![VirusTotal](https://img.shields.io/badge/dynamic/json?label=VirusTotal&query=%24.message&url=https%3A%2F%2Fraw.githubusercontent.com%2Fxcy7e%2FContextium%2Frefs%2Fheads%2Fmaster%2Fvt-badge.json&color=green&logo=virustotal&logoColor=white)](https://xcy7e.github.io/Contextium/vt-latest.html)
+[![VirusTotal](https://img.shields.io/badge/dynamic/json?label=VirusTotal&query=%24.message&url=https%3A%2F%2Fraw.githubusercontent.com%2Fxcy7e%2FContextium%2Fmaster%2F.github%2Fvt-badge.json&color=green&logo=virustotal&logoColor=white)](https://xcy7e.github.io/Contextium/vt-latest.html)
 
 Contextium extends Android's native text-selection menu with configurable actions for web searches.
 Select text in almost any app (e.g., your browser), choose **Contextium** from the context menu,
