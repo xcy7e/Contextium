@@ -5,7 +5,7 @@
 <h1 style="margin-top:0;max-width: 100%;">Contextium</h1>
 
 [![GitHub version](https://img.shields.io/github/v/release/xcy7e/Contextium?label=Latest&logo=github&color=%23ffffff)](https://github.com/xcy7e/Contextium/releases)
-[![F-Droid version](https://img.shields.io/f-droid/v/app.xcy7e.contextium?label=F-Droid&logo=fdroid&logoColor=%23b2eb0c&color=%2300b0ff)](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/app.xcy7e.contextium.yml)
+[![F-Droid version](https://img.shields.io/f-droid/v/app.xcy7e.contextium?label=F-Droid&logo=fdroid&logoColor=%23b2eb0c&color=%2300b0ff)](https://f-droid.org/de/packages/app.xcy7e.contextium/)
 [![VirusTotal](https://img.shields.io/badge/dynamic/json?label=VirusTotal&query=%24.message&url=https%3A%2F%2Fraw.githubusercontent.com%2Fxcy7e%2FContextium%2Fmaster%2F.github%2Fvt-badge.json&color=green&logo=virustotal&logoColor=white)](https://xcy7e.github.io/Contextium/vt-latest.html)
 
 Contextium extends Android's native text-selection menu with configurable actions for web searches. It provides a separate, fully customizable context menu.
