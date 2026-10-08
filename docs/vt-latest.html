@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Redirecting to latest VirusTotal report…</title>
+    <script>
+        fetch('https://raw.githubusercontent.com/xcy7e/Contextium/vt-badge/vt-badge.json')
+          .then(r => r.json())
+          .then(data => {
+            if (data && data.url) {
+              window.location.replace(data.url);
+            } else {
+              document.body.textContent = 'No VirusTotal URL found.';
+            }
+          })
+          .catch(() => {
+            document.body.textContent = 'Failed to load VirusTotal badge data.';
+          });
+    </script>
+</head>
+<body>
+Redirecting to latest VirusTotal report…
+</body>
+</html>

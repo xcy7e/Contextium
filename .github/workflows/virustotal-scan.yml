@@ -1,0 +1,62 @@
+name: VirusTotal APK Scan
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:  # allow manual trigger via actions ui
+
+permissions:
+  contents: write
+
+env:
+  VT_API_KEY: ${{ secrets.VIRUSTOTAL_API_KEY }}
+
+jobs:
+  virustotal-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download APK from release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RELEASE_TAG="${{ github.event.release.tag_name }}"
+          ASSET_NAME=$(gh release view "$RELEASE_TAG" --json assets --jq '.assets[0].name')
+          gh release download "$RELEASE_TAG" --pattern "$ASSET_NAME" --dir ./downloaded-apk
+
+      - name: Find APK file
+        id: find-apk
+        run: |
+          APK_PATH=$(find ./downloaded-apk -type f -name "*.apk" | head -n1)
+          if [ -z "$APK_PATH" ]; then
+            echo "No APK found in release assets"
+            exit 1
+          fi
+          echo "apk_path=$APK_PATH" >> $GITHUB_OUTPUT
+
+      - name: Scan APK with VirusTotal
+        run: |
+          python -m pip install requests
+          python vt_scan.py
+        env:
+          VT_API_KEY: ${{ secrets.VIRUSTOTAL_API_KEY }}
+          VT_COMMENT: "Release ${{ github.event.release.tag_name }} – ${{ github.event.release.name }}"
+          APK_PATH: ${{ steps.find-apk.outputs.apk_path }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Push badge JSON to vt-badge branch
+        run: |
+          git fetch origin vt-badge --depth=1 || true
+          git checkout --orphan vt-badge
+          git rm -rf .
+          cp vt-badge.json .
+          git add vt-badge.json
+          git commit -m "Update VirusTotal badge for ${{ github.event.release.tag_name }}"
+          git push -f origin vt-badge

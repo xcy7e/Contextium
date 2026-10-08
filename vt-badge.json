@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "label": "VirusTotal",
+  "message": "0/67 detected",
+  "malicious": 0,
+  "harmless": 0,
+  "total": 67,
+  "url": "https://www.virustotal.com/gui/file/dc182fcfbe3e33c63a4b6ca474334102354b7c6535111abeb1d4c9c8a09a9403/detection"
+}
