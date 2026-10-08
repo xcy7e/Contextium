@@ -24,18 +24,26 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           RELEASE_TAG="${{ github.event.release.tag_name }}"
-          ASSET_NAME=$(gh release view "$RELEASE_TAG" --json assets --jq '.assets[0].name')
+          # Fallback: falls kein Asset existiert, ersten .apk-Namen nehmen
+          ASSET_NAME=$(gh release view "$RELEASE_TAG" --json assets --jq '.assets[0].name' 2>/dev/null || echo "")
+          if [ -z "$ASSET_NAME" ]; then
+            echo "No assets found for release $RELEASE_TAG"
+            exit 1
+          fi
           gh release download "$RELEASE_TAG" --pattern "$ASSET_NAME" --dir ./downloaded-apk
 
       - name: Find APK file
         id: find-apk
         run: |
+          echo "=== Files in ./downloaded-apk ==="
+          find ./downloaded-apk -type f
           APK_PATH=$(find ./downloaded-apk -type f -name "*.apk" | head -n1)
           if [ -z "$APK_PATH" ]; then
             echo "No APK found in release assets"
             exit 1
           fi
           echo "apk_path=$APK_PATH" >> $GITHUB_OUTPUT
+          echo "=== Using APK: $APK_PATH ==="
 
       - name: Scan APK with VirusTotal
         run: |
