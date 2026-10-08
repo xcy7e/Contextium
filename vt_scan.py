@@ -116,9 +116,14 @@ def add_comment(file_hash: str) -> None:
         timeout=30,
     )
 
-    # 409 = Avoid duplicating comments
+    # 409 = Comment already exists
     if response.status_code == 409:
-        print("Comment already exists; skipped.")
+        print("Comment already exists. Skipped.")
+        return
+
+    # 5xx = Server-Error on VT → ignore
+    if response.status_code >= 500:
+        print(f"VirusTotal Server Error ({response.status_code}); Comment skipped.")
         return
 
     response.raise_for_status()
