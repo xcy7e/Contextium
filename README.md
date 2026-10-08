@@ -9,7 +9,7 @@
 [![VirusTotal](https://img.shields.io/badge/dynamic/json?label=VirusTotal&query=%24.message&url=https%3A%2F%2Fraw.githubusercontent.com%2Fxcy7e%2FContextium%2Fmaster%2F.github%2Fvt-badge.json&color=green&logo=virustotal&logoColor=white)](https://xcy7e.github.io/Contextium/vt-latest.html)
 
 Contextium extends Android's native text-selection menu with configurable actions for web searches. It provides a separate, fully customizable context menu.
-Select text in almost any app (e.g., browser), choose **Contextium** from the context menu and pick one of your configured menu entries to pass the selected text to any website.
+Select text, choose **Contextium** from the context menu and pick one of your configured menu entries to pass the selected text to any website.
 
 Since I search for audiobooks daily across various websites, I realized these repeated search steps of *copy & paste*
 could be streamlined. Contextium was built to simplify these repetitive workflows by turning them
@@ -168,6 +168,10 @@ You could, for example, search for...
 - **Games** (Steam, Metacritic, IGDB, …)
 - **Developer tools** (Whois, encryption, scanner, …)
 - **Recipes**, **Translators**, **Academic topics**, **Patents**, **Jobs** and more...
+
+**Tip**: You can also add additional static text before/after the dynamic text selection value (in an items URL). This allows you to put the dynamics content in a fixed context, for example to ask an AI a specific question about what you selected.
+You can find such examples in the [example backup](#Example-file).
+Let's say you regulary ASK an AI what Genres a book has - an item with an AI URL containing "What 15 Genres has this book: " before `%s`. This item can then serve as a 'Genre-Finder' for every book you search by selection.
 
 ---
 
